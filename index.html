@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XV Años Romina</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --accent: #4a148c;
+            --text: #333333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-script {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Safari Fix for background fixed */
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
+                        url('https://i.imgur.com/ZrLbMmO.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .section-white {
+            background-color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-pattern {
+            background-color: #fdfbff;
+            background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Vertical adjustments */
+        .min-h-screen-ios {
+            height: 100vh;
+            height: 100dvh; /* Dynamic viewport for modern mobile browsers */
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(106, 27, 154, 0.08);
+            border: 1px solid #f3e5f5;
+        }
+
+        .btn-primary {
+            background-color: #25d366;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Floating Music Button */
+        #music-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            background: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .itinerary-line {
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e1bee7;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Countdown items */
+        .time-box {
+            background: #f3e5f5;
+            padding: 10px;
+            border-radius: 12px;
+            min-width: 65px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Layer -->
+    <div class="hero-bg"></div>
+
+    <!-- Music -->
+    <audio id="player" loop>
+        <source src="https://vocaroo.com/media/download/1cX0OQhYpi7D" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" aria-label="Reproducir música">
+        <i id="music-icon" class="fa-solid fa-music"></i>
+    </button>
+
+    <!-- Navigation (Mobile focused) -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-sm border-b border-purple-100 py-3 overflow-x-auto">
+        <div class="flex justify-center gap-5 px-6 text-[10px] md:text-xs font-bold text-purple-900 uppercase tracking-widest whitespace-nowrap">
+            <a href="#inicio">Inicio</a>
+            <a href="#donde">Ubicación</a>
+            <a href="#itinerario">Agenda</a>
+            <a href="#regalos">Regalos</a>
+            <a href="#confirmar">RSVP</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen-ios flex flex-col items-center justify-center text-center text-white px-6">
+        <div class="reveal active">
+            <h2 class="text-xl md:text-3xl mb-2 font-light tracking-[0.3em] uppercase">Mis Quince Años</h2>
+            <h1 class="font-script text-8xl md:text-9xl mb-6 drop-shadow-lg">Romina</h1>
+            <p class="text-base md:text-xl font-light italic max-w-sm mx-auto leading-relaxed opacity-90">
+                “Mis XV años llegan llenos de sueños… y quiero invitarte a ser parte de esta celebración tan especial.”
+            </p>
+        </div>
+    </section>
+
+    <!-- Fecha y Contador -->
+    <section class="section-white section-padding py-20 text-center px-6">
+        <div class="reveal">
+            <h3 class="font-script text-6xl text-purple-800 mb-6">Guarda la fecha</h3>
+            <div class="flex items-center justify-center gap-4 text-gray-600 mb-10">
+                <div class="border-y border-purple-100 py-2 uppercase text-xs tracking-widest font-semibold">Sábado</div>
+                <div class="text-purple-900 font-bold text-6xl">11</div>
+                <div class="border-y border-purple-100 py-2 uppercase text-xs tracking-widest font-semibold">Julio 2026</div>
+            </div>
+            <div id="timer" class="flex justify-center gap-3">
+                <!-- JS Populates -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Padres -->
+    <section class="section-pattern py-20 px-6">
+        <div class="max-w-md mx-auto text-center reveal">
+            <div class="mb-10 flex justify-center">
+                <img src="https://i.imgur.com/ag2i4QX.jpg" alt="Romina" class="w-64 h-64 object-cover rounded-full border-4 border-white shadow-xl">
+            </div>
+            <h3 class="font-script text-5xl text-purple-800 mb-8">Con la bendición de:</h3>
+            <div class="space-y-8">
+                <div>
+                    <h4 class="text-[10px] uppercase tracking-[0.2em] text-purple-400 font-bold mb-2">Mis Padres</h4>
+                    <p class="text-lg font-semibold">Alicia Ibeth Cornejo Medina</p>
+                    <p class="text-lg font-semibold">Sergio Barajas Mondragón</p>
+                </div>
+                <div>
+                    <h4 class="text-[10px] uppercase tracking-[0.2em] text-purple-400 font-bold mb-2">Mi Madrina</h4>
+                    <p class="text-lg font-semibold">Ma. Fernanda Rincón Medina</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicaciones -->
+    <section id="donde" class="section-white py-20 px-6">
+        <div class="max-w-lg mx-auto space-y-10">
+            <!-- Misa -->
+            <div class="card p-6 text-center reveal">
+                <div class="mb-4 overflow-hidden rounded-2xl h-48">
+                    <img src="https://i.imgur.com/pElU9x1.jpg" alt="Misa" class="w-full h-full object-cover">
+                </div>
+                <i class="fa-solid fa-church text-purple-600 text-2xl mb-3"></i>
+                <h3 class="font-script text-4xl text-purple-800 mb-2">Ceremonia Religiosa</h3>
+                <p class="text-sm font-bold text-purple-900 mb-1">6:30 PM</p>
+                <p class="text-xs text-gray-500 uppercase tracking-tight mb-4">Rectoría de Ntra. Sra. de la Soledad</p>
+                <a href="https://maps.app.goo.gl/uXj5U6p8s7d8f9g0" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-200 pb-1 text-purple-700">VER UBICACIÓN</a>
+            </div>
+
+            <!-- Recepción -->
+            <div class="card p-6 text-center reveal">
+                <div class="mb-4 overflow-hidden rounded-2xl h-48">
+                    <img src="https://i.imgur.com/q60MuAh.jpg" alt="Fiesta" class="w-full h-full object-cover">
+                </div>
+                <i class="fa-solid fa-glass-cheers text-purple-600 text-2xl mb-3"></i>
+                <h3 class="font-script text-4xl text-purple-800 mb-2">Recepción</h3>
+                <p class="text-sm font-bold text-purple-900 mb-1">7:30 PM</p>
+                <p class="text-xs text-gray-500 uppercase tracking-tight mb-4">Salón “La Fortaleza”</p>
+                <a href="https://maps.app.goo.gl/uXj5U6p8s7d8f9g0" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-200 pb-1 text-purple-700">VER UBICACIÓN</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerario -->
+    <section id="itinerario" class="section-pattern py-20 px-8">
+        <div class="max-w-sm mx-auto">
+            <h3 class="font-script text-6xl text-purple-800 text-center mb-12">Agenda</h3>
+            <div class="relative space-y-10">
+                <div class="itinerary-line"></div>
+                
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-cross"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">6:30 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">Ceremonia religiosa</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-door-open"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">7:30 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">Recepción en salón</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">8:00 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">Entrada triunfal</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">8:10 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">Vals</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">8:30 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">Banquete</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start reveal">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex-shrink-0 z-10 flex items-center justify-center text-white text-xs border-4 border-white shadow-sm">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-500">9:00 PM</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wide">¡A bailar!</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center text-xs italic text-gray-500 border-t border-purple-100 pt-6">
+                “Trae zapatos cómodos para disfrutar toda la noche”
+            </div>
+        </div>
+    </section>
+
+    <!-- Regalos e Importante -->
+    <section id="regalos" class="section-white py-20 px-6">
+        <div class="max-w-lg mx-auto space-y-12">
+            <div class="reveal">
+                <div class="mb-4 overflow-hidden rounded-2xl h-48">
+                    <img src="https://i.imgur.com/9UFDaoN.jpg" alt="Mesa de regalos" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold uppercase tracking-widest mb-4">Mesa de Regalos</h3>
+                <p class="text-sm text-gray-600 mb-6">Tu presencia es lo más importante, pero si deseas hacerme un detalle:</p>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-center">
+                    <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">Liverpool</p>
+                    <p class="text-2xl font-bold text-purple-900 tracking-widest">51936318</p>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-4 text-center">TAMBIÉN HABRÁ UN BUZÓN DE SOBRES EN EL SALÓN</p>
+            </div>
+
+            <div class="bg-red-50 p-8 rounded-3xl border border-red-100 text-center reveal">
+                <h3 class="text-red-500 font-bold uppercase tracking-widest text-lg mb-2">Importante</h3>
+                <p class="text-2xl font-bold text-red-600 mb-2 italic">“SIN NIÑOS”</p>
+                <p class="text-xs text-red-400">Queremos que los adultos disfruten al máximo esta noche especial.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="confirmar" class="section-pattern py-24 text-center px-6">
+        <div class="reveal">
+            <h3 class="font-script text-7xl text-purple-800 mb-4">Confirmación</h3>
+            <p class="text-sm text-gray-600 mb-10 max-w-xs mx-auto">
+                Me encantaría compartir este sueño contigo. Por favor confirma tu presencia antes del <strong>6 de junio</strong>.
+            </p>
+            
+            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia%20a%20tus%20XV%20Años." target="_blank" class="btn-primary">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                CONFIRMAR ASISTENCIA
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-purple-950 text-white/50 py-12 text-center">
+        <h2 class="font-script text-4xl text-white mb-2">Romina</h2>
+        <p class="text-[9px] uppercase tracking-[0.4em]">2026 • Mis Quince Años</p>
+    </footer>
+
+    <script>
+        // Reveal Logic
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Timer Logic
+        const target = new Date("July 11, 2026 18:30:00").getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = target - now;
+            
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerHTML = `
+                <div class="time-box"><span class="block text-xl font-bold text-purple-900">${d}</span><span class="text-[8px] uppercase">Días</span></div>
+                <div class="time-box"><span class="block text-xl font-bold text-purple-900">${h}</span><span class="text-[8px] uppercase">Hrs</span></div>
+                <div class="time-box"><span class="block text-xl font-bold text-purple-900">${m}</span><span class="text-[8px] uppercase">Min</span></div>
+                <div class="time-box"><span class="block text-xl font-bold text-purple-900">${s}</span><span class="text-[8px] uppercase">Seg</span></div>
+            `;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Audio Logic for Safari/iOS
+        const audio = document.getElementById('player');
+        const btn = document.getElementById('music-toggle');
+        const icon = document.getElementById('music-icon');
+        let playing = false;
+
+        btn.addEventListener('click', () => {
+            if (playing) {
+                audio.pause();
+                icon.className = 'fa-solid fa-music';
+            } else {
+                audio.play();
+                icon.className = 'fa-solid fa-pause';
+            }
+            playing = !playing;
+        });
+
+        // Prevent zoom on double tap Safari
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
