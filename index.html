@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XV Años Romina - Bosque Místico Púrpura</title>
+    <title>XV Años Romina - Bosque Encantado Light</title>
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,42 +14,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --forest-black: #0a050f; 
-            --forest-deep: #1a0a24;  
-            --forest-mist: #311b92;  
+            --bg-light: #fdfbff;
+            --lavender-soft: #f3e5f5;
+            --purple-mist: #e1bee7;
             --accent-purple: #6a1b9a;
-            --lavender-light: #e1bee7;
-            --silver: #f3e5f5;
-            --lumbrera-color: #ce93d8;
-            --lumbrera-glow: rgba(206, 147, 216, 0.6);
-            --gold-text: #d4af37;
+            --deep-purple: #4a148c;
+            --lumbrera-orange: #ff9100;
+            --lumbrera-glow: rgba(255, 145, 0, 0.4);
+            --text-main: #2d1a36;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            color: #333;
+            color: var(--text-main);
             overflow-x: hidden;
-            background-color: var(--forest-black);
+            background-color: var(--bg-light);
             -webkit-font-smoothing: antialiased;
         }
 
         .font-script { font-family: 'Great Vibes', cursive; }
         .font-serif { font-family: 'Playfair Display', serif; }
 
-        /* Fondo Paralaje Estilo Safari */
+        /* Fondo Paralaje Claro */
         .hero-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(10, 5, 15, 0.6), rgba(10, 5, 15, 0.9)), 
+            background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(243, 229, 245, 0.7)), 
                         url('https://i.imgur.com/ZrLbMmO.jpg') no-repeat center center;
             background-size: cover;
             z-index: -1;
         }
 
-        /* Niebla Mística Púrpura */
+        /* Niebla Blanca/Lavanda */
         .fog-container {
             position: absolute;
             width: 100%;
@@ -57,18 +56,14 @@
             overflow: hidden;
             z-index: 2;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         .fog-img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
+            top: 0; left: 0; width: 200%; height: 100%;
             background: url('https://www.transparenttextures.com/patterns/fog.png');
-            filter: hue-rotate(240deg); 
-            animation: fog-move 90s linear infinite;
+            animation: fog-move 100s linear infinite;
         }
 
         @keyframes fog-move {
@@ -76,13 +71,10 @@
             to { transform: translateX(-50%); }
         }
 
-        /* Capa Mágica (Luciérnagas) */
+        /* Capa Mágica (Luciérnagas y Hojas) */
         .magic-layer {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 5;
         }
@@ -93,80 +85,80 @@
             border-radius: 50%;
             opacity: 0;
             animation: fly var(--duration) infinite ease-in-out;
-            box-shadow: 0 0 10px var(--lumbrera-color);
+            box-shadow: 0 0 8px var(--accent-purple);
         }
 
         @keyframes fly {
             0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
-            50% { opacity: 0.8; transform: translate(var(--x), var(--y)) scale(1); }
+            50% { opacity: 0.6; transform: translate(var(--x), var(--y)) scale(1); }
             100% { opacity: 0; transform: translate(calc(var(--x) * 1.5), calc(var(--y) * 1.5)) scale(0.3); }
         }
 
-        /* Lumbreras Púrpuras */
+        /* Lumbreras (Resplandor cálido) */
         .lumbrera {
-            filter: blur(2px) drop-shadow(0 0 20px var(--lumbrera-glow));
+            filter: blur(1px) drop-shadow(0 0 15px var(--lumbrera-glow));
             animation: pulse-lumbrera 5s infinite ease-in-out;
-            color: var(--lumbrera-color);
+            color: var(--lumbrera-orange);
             display: inline-block;
         }
 
         @keyframes pulse-lumbrera {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.4); opacity: 0.9; }
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 0.9; }
         }
 
-        /* Raíces y Ramas */
+        /* Raíces y Ramas (Color Púrpura Suave) */
         .forest-overlay {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 10;
-            opacity: 0.15;
-            color: var(--lavender-light);
+            opacity: 0.2;
+            color: var(--accent-purple);
         }
 
         .branch-top { top: -20px; left: -20px; transform: rotate(15deg); }
         .roots-bottom { bottom: -10px; left: 0; width: 100%; }
 
-        /* Estética de Secciones */
-        .section-white { background-color: #ffffff; position: relative; z-index: 10; }
-        .section-dark { background-color: var(--forest-deep); color: #f8fafc; position: relative; z-index: 10; }
+        /* Estructura de Secciones */
+        .section-light { background-color: white; position: relative; z-index: 10; }
+        .section-lavender { background-color: var(--lavender-soft); position: relative; z-index: 10; }
 
         .card-magic {
             background: white;
             border-radius: 0;
-            box-shadow: 0 10px 60px rgba(74, 20, 140, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 40px rgba(106, 27, 154, 0.1);
+            border: 1px solid var(--purple-mist);
             overflow: hidden;
         }
 
         .img-parallax {
-            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .group:hover .img-parallax {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .btn-whatsapp {
             background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
-            padding: 18px 38px;
+            padding: 16px 36px;
             border-radius: 2px;
             display: inline-flex;
             align-items: center;
             gap: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             font-size: 0.8rem;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: all 0.5s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+            transition: all 0.4s ease;
         }
 
         .btn-whatsapp:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
         }
 
         #music-toggle {
@@ -174,23 +166,23 @@
             bottom: 30px;
             right: 30px;
             z-index: 100;
-            background: rgba(49, 27, 146, 0.9);
+            background: white;
             backdrop-filter: blur(10px);
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--lavender-light);
-            color: var(--lavender-light);
-            box-shadow: 0 0 25px rgba(106, 27, 154, 0.5);
+            border: 2px solid var(--accent-purple);
+            color: var(--accent-purple);
+            box-shadow: 0 5px 15px rgba(106, 27, 154, 0.2);
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -203,26 +195,24 @@
             height: 12px;
             background: var(--accent-purple);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--accent-purple);
+            box-shadow: 0 0 10px var(--accent-purple);
             z-index: 10;
         }
 
-        /* Paleta de colores vestimenta */
-        .color-circle {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 5px;
-            border: 1px solid rgba(0,0,0,0.1);
+        .timer-box {
+            background: white;
+            border: 1px solid var(--purple-mist);
+            padding: 15px;
+            min-width: 85px;
+            box-shadow: 0 5px 15px rgba(106, 27, 154, 0.05);
         }
 
-        .timer-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            min-width: 80px;
-            backdrop-filter: blur(5px);
+        .color-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 1px solid rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -231,28 +221,28 @@
     <div class="hero-bg"></div>
     <div class="magic-layer" id="magic-elements"></div>
 
-    <!-- Nueva canción de fondo -->
+    <!-- Música actualizada -->
     <audio id="player" loop>
         <source src="https://vocaroo.com/media/download/130riecfdnpA" type="audio/mpeg">
     </audio>
     
-    <button id="music-toggle">
+    <button id="music-toggle" title="Música del Bosque">
         <i id="music-icon" class="fa-solid fa-play"></i>
     </button>
 
     <!-- Navegación -->
-    <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-2xl border-b border-white/5 py-5 overflow-x-auto">
-        <div class="flex justify-center gap-8 px-10 text-[9px] font-bold text-white/60 uppercase tracking-[0.5em] whitespace-nowrap">
-            <a href="#inicio" class="hover:text-purple-300 transition-colors">Inicio</a>
-            <a href="#donde" class="hover:text-purple-300 transition-colors">Encuentro</a>
-            <a href="#itinerario" class="hover:text-purple-300 transition-colors">Travesía</a>
-            <a href="#vestimenta" class="hover:text-purple-300 transition-colors">Vestimenta</a>
-            <a href="#confirmar" class="hover:text-purple-300 transition-colors">Presencia</a>
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-purple-100 py-4 overflow-x-auto">
+        <div class="flex justify-center gap-8 px-10 text-[10px] font-bold text-purple-900/60 uppercase tracking-[0.4em] whitespace-nowrap">
+            <a href="#inicio" class="hover:text-purple-900 transition-colors">Inicio</a>
+            <a href="#donde" class="hover:text-purple-900 transition-colors">Encuentro</a>
+            <a href="#itinerario" class="hover:text-purple-900 transition-colors">Travesía</a>
+            <a href="#vestimenta" class="hover:text-purple-900 transition-colors">Vestimenta</a>
+            <a href="#confirmar" class="hover:text-purple-900 transition-colors">Presencia</a>
         </div>
     </nav>
 
-    <!-- Portada (Hero) -->
-    <section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center text-white px-6 relative overflow-hidden">
+    <!-- Portada -->
+    <section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
         <div class="fog-container">
             <div class="fog-img"></div>
         </div>
@@ -261,139 +251,174 @@
             <path d="M0,0 Q30,10 50,0 T100,20 M20,5 Q40,25 30,50 M60,10 Q80,40 90,20" fill="none" stroke="currentColor" stroke-width="0.5"/>
         </svg>
 
-        <div class="absolute top-1/4 left-[15%] lumbrera opacity-40"><i class="fa-solid fa-fire text-4xl"></i></div>
-        <div class="absolute bottom-1/3 right-[10%] lumbrera opacity-25" style="animation-delay: 2.5s;"><i class="fa-solid fa-fire-flame-curved text-3xl"></i></div>
-
         <div class="reveal active relative z-10">
-            <p class="text-xs md:text-sm mb-6 tracking-[0.8em] uppercase font-light text-purple-200/60">Bienvenidos a mi bosque encantado</p>
-            <h1 class="font-script text-8xl md:text-[11rem] mb-8 italic drop-shadow-[0_0_30px_rgba(106,27,154,0.4)]">Romina</h1>
-            <div class="h-px w-32 bg-gradient-to-r from-transparent via-purple-300/40 to-transparent mx-auto mb-12"></div>
-            <p class="text-sm md:text-xl font-light italic max-w-sm mx-auto leading-relaxed text-purple-100/60 font-serif">
+            <div class="mb-6 flex justify-center items-center gap-4">
+                <div class="lumbrera text-orange-400"><i class="fa-solid fa-fire text-2xl"></i></div>
+                <p class="text-xs md:text-sm tracking-[0.7em] uppercase font-light text-purple-900/60">Bienvenidos a mi bosque encantado</p>
+                <div class="lumbrera text-orange-400" style="animation-delay: 2s;"><i class="fa-solid fa-fire text-2xl"></i></div>
+            </div>
+            
+            <h1 class="font-serif text-8xl md:text-[10rem] mb-6 italic text-purple-900 drop-shadow-sm">Romina</h1>
+            <div class="h-px w-32 bg-gradient-to-r from-transparent via-purple-300 to-transparent mx-auto mb-10"></div>
+            
+            <p class="text-sm md:text-xl font-light italic max-w-sm mx-auto leading-relaxed text-purple-900/70 font-serif">
                 “Mis XV años llegan llenos de sueños… y quiero invitarte a ser parte de esta historia mágica.”
             </p>
         </div>
         
-        <div class="absolute bottom-12 animate-pulse text-purple-200/20">
-            <i class="fa-solid fa-angle-double-down text-2xl"></i>
+        <div class="absolute bottom-12 animate-bounce text-purple-400 opacity-40">
+            <i class="fa-solid fa-chevron-down text-xl"></i>
         </div>
     </section>
 
     <!-- Contador -->
-    <section class="section-dark py-36 text-center px-6 border-y border-white/5 relative">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,27,154,0.05)_0%,transparent_80%)]"></div>
+    <section class="section-lavender py-32 text-center px-6 border-y border-purple-100 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)]"></div>
         <div class="reveal relative z-10">
-            <h3 class="font-serif text-3xl md:text-4xl uppercase tracking-[0.5em] mb-16 italic text-purple-200/80">11 • Julio • 2026</h3>
+            <h3 class="font-serif text-3xl md:text-4xl uppercase tracking-[0.5em] mb-14 italic text-purple-900/80">11 • Julio • 2026</h3>
             <div id="timer" class="flex justify-center gap-4 md:gap-8 flex-wrap"></div>
-            <p class="mt-20 font-script text-5xl opacity-30 text-purple-100 italic">Bajo el susurro de los árboles...</p>
+            <p class="mt-16 font-script text-5xl opacity-40 text-purple-900 italic">Bajo el resplandor de las hadas...</p>
         </div>
     </section>
 
     <!-- Imagen y Familia -->
-    <section class="section-dark py-32 px-6 relative overflow-hidden">
+    <section class="section-light py-28 px-6 relative overflow-hidden">
         <svg class="forest-overlay roots-bottom h-96 opacity-10" viewBox="0 0 200 100">
             <path d="M0,100 Q40,60 20,20 M30,100 Q60,40 80,70 M100,100 Q90,30 120,50 M150,100 Q180,50 160,10 M200,100 Q190,70 180,90" fill="none" stroke="currentColor" stroke-width="0.3"/>
         </svg>
 
         <div class="max-w-md mx-auto text-center reveal">
             <div class="mb-20 relative inline-block group">
-                <div class="relative overflow-hidden card-magic border-4 border-white/5">
-                    <img src="https://i.imgur.com/ag2i4QX.jpg" alt="Romina" class="w-80 h-[520px] object-cover grayscale-[10%] brightness-90 img-parallax">
+                <div class="relative overflow-hidden card-magic border-8 border-white">
+                    <img src="https://i.imgur.com/ag2i4QX.jpg" alt="Romina" class="w-80 h-[500px] object-cover brightness-105 img-parallax">
                 </div>
-                <div class="absolute -bottom-10 -right-10 bg-purple-950/60 backdrop-blur-3xl p-7 border border-purple-200/10 shadow-2xl">
-                    <i class="fa-solid fa-tree text-purple-200/30 text-4xl"></i>
+                <div class="absolute -bottom-10 -right-10 bg-white/80 backdrop-blur-xl p-7 border border-purple-100 shadow-2xl">
+                    <i class="fa-solid fa-leaf text-purple-300 text-4xl"></i>
                 </div>
             </div>
             
-            <h3 class="font-serif text-3xl italic mb-16 text-purple-200/40 tracking-widest">Bendecida por mi familia</h3>
+            <h3 class="font-serif text-3xl italic mb-14 text-purple-900/40 tracking-widest">Bendecida por mi familia</h3>
             
             <div class="grid gap-16">
                 <div class="reveal">
-                    <h4 class="text-[9px] uppercase tracking-[0.7em] text-purple-300/20 font-bold mb-5">Mis Padres</h4>
-                    <p class="text-3xl font-serif italic text-white/90">Alicia Ibeth Cornejo Medina</p>
-                    <p class="text-3xl font-serif italic text-white/90">Sergio Barajas Mondragón</p>
+                    <h4 class="text-[10px] uppercase tracking-[0.6em] text-purple-400 font-bold mb-4">Mis Padres</h4>
+                    <p class="text-2xl font-serif italic text-purple-900">Alicia Ibeth Cornejo Medina</p>
+                    <p class="text-2xl font-serif italic text-purple-900">Sergio Barajas Mondragón</p>
                 </div>
                 <div class="reveal" style="transition-delay: 0.3s;">
-                    <h4 class="text-[9px] uppercase tracking-[0.7em] text-purple-300/20 font-bold mb-5">Mi Madrina</h4>
-                    <p class="text-3xl font-serif italic text-white/90">Ma. Fernanda Rincón Medina</p>
+                    <h4 class="text-[10px] uppercase tracking-[0.6em] text-purple-400 font-bold mb-4">Mi Madrina</h4>
+                    <p class="text-2xl font-serif italic text-purple-900">Ma. Fernanda Rincón Medina</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Ubicaciones -->
-    <section id="donde" class="section-white py-36 px-6 relative overflow-hidden">
+    <section id="donde" class="section-lavender py-36 px-6 relative overflow-hidden">
         <div class="max-w-3xl mx-auto space-y-32 relative z-10">
             <div class="text-center">
                 <div class="flex justify-center items-center gap-10 mb-24">
-                    <div class="lumbrera text-purple-900/40"><i class="fa-solid fa-leaf"></i></div>
-                    <h2 class="font-serif text-5xl md:text-6xl uppercase tracking-[0.3em] text-purple-900 italic">El Encuentro</h2>
-                    <div class="lumbrera text-purple-900/40" style="animation-delay: 2s;"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="lumbrera text-orange-500"><i class="fa-solid fa-fire text-xl"></i></div>
+                    <h2 class="font-serif text-5xl md:text-6xl uppercase tracking-[0.2em] text-purple-900 italic">El Encuentro</h2>
+                    <div class="lumbrera text-orange-500" style="animation-delay: 1.5s;"><i class="fa-solid fa-fire text-xl"></i></div>
                 </div>
                 
+                <!-- Misa -->
                 <div class="mb-32 reveal">
-                    <div class="mb-12 relative group card-magic h-96">
-                        <img src="https://i.imgur.com/pElU9x1.jpg" alt="Misa" class="w-full h-full object-cover grayscale-[20%] img-parallax">
+                    <div class="mb-10 relative group card-magic h-96 border-4 border-white">
+                        <img src="https://i.imgur.com/pElU9x1.jpg" alt="Misa" class="w-full h-full object-cover img-parallax">
                     </div>
-                    <p class="text-[12px] font-bold text-purple-900 tracking-[0.6em] uppercase mb-5">Ceremonia Religiosa • 18:30 h</p>
-                    <h4 class="font-serif text-3xl mb-10 italic text-gray-700 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-200 pb-2 tracking-[0.5em] text-purple-900 hover:text-purple-700 transition-all">UBICACIÓN DEL BOSQUE</a>
+                    <p class="text-[12px] font-bold text-purple-900 tracking-[0.6em] uppercase mb-4">Ceremonia Religiosa • 18:30 h</p>
+                    <h4 class="font-serif text-3xl mb-8 italic text-gray-800 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
+                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-300 pb-2 tracking-[0.4em] text-purple-900 transition-all uppercase">Mapa del Bosque</a>
                 </div>
 
+                <!-- Recepción -->
                 <div class="reveal">
-                    <div class="mb-12 relative group card-magic h-96">
-                        <img src="https://i.imgur.com/q60MuAh.jpg" alt="Fiesta" class="w-full h-full object-cover grayscale-[20%] img-parallax">
+                    <div class="mb-10 relative group card-magic h-96 border-4 border-white">
+                        <img src="https://i.imgur.com/q60MuAh.jpg" alt="Fiesta" class="w-full h-full object-cover img-parallax">
                     </div>
-                    <p class="text-[12px] font-bold text-purple-900 tracking-[0.6em] uppercase mb-5">Recepción • 19:30 h</p>
-                    <h4 class="font-serif text-3xl mb-10 italic text-gray-700 leading-tight">Salón “La Fortaleza”</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-200 pb-2 tracking-[0.5em] text-purple-900 hover:text-purple-700 transition-all">UBICACIÓN DEL SALÓN</a>
+                    <p class="text-[12px] font-bold text-purple-900 tracking-[0.6em] uppercase mb-4">Recepción • 19:30 h</p>
+                    <h4 class="font-serif text-3xl mb-8 italic text-gray-800 leading-tight">Salón “La Fortaleza”</h4>
+                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold border-b-2 border-purple-300 pb-2 tracking-[0.4em] text-purple-900 transition-all uppercase">Mapa del Salón</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Itinerario -->
-    <section id="itinerario" class="section-dark py-36 px-8 relative overflow-hidden">
-        <div class="max-w-sm mx-auto relative z-10">
-            <h3 class="font-serif text-5xl text-center mb-28 italic text-purple-200/80 tracking-[0.2em]">La Travesía</h3>
-            <div class="relative space-y-20">
-                <div class="absolute left-[19px] top-0 bottom-0 w-px bg-purple-300/10"></div>
-                <div class="flex gap-12 items-start reveal"><div class="itinerary-dot mt-2"></div><div><span class="text-[10px] font-bold text-purple-300/30 tracking-[0.6em]">18:30 h</span><h4 class="text-sm font-serif italic text-purple-100/80 uppercase mt-2">Acción de Gracias</h4></div></div>
-                <div class="flex gap-12 items-start reveal"><div class="itinerary-dot mt-2"></div><div><span class="text-[10px] font-bold text-purple-300/30 tracking-[0.6em]">19:30 h</span><h4 class="text-sm font-serif italic text-purple-100/80 uppercase mt-2">Llegada al Salón</h4></div></div>
-                <div class="flex gap-12 items-start reveal"><div class="itinerary-dot mt-2"></div><div><span class="text-[10px] font-bold text-purple-300/30 tracking-[0.6em]">20:10 h</span><h4 class="text-sm font-serif italic text-purple-100/80 uppercase mt-2">Entrada Triunfal / Vals</h4></div></div>
-                <div class="flex gap-12 items-start reveal"><div class="itinerary-dot mt-2"></div><div><span class="text-[10px] font-bold text-purple-300/30 tracking-[0.6em]">20:30 h</span><h4 class="text-sm font-serif italic text-purple-100/80 uppercase mt-2">Banquete Real</h4></div></div>
-                <div class="flex gap-12 items-start reveal"><div class="itinerary-dot mt-2 animate-pulse" style="background: white;"></div><div><span class="text-[10px] font-bold text-purple-300/30 tracking-[0.6em]">21:00 h</span><h4 class="text-sm font-serif italic text-white uppercase mt-2">Baile Eterno</h4></div></div>
+    <section id="itinerario" class="section-light py-32 px-8 relative overflow-hidden">
+        <div class="max-w-xs mx-auto relative z-10">
+            <h3 class="font-serif text-5xl text-center mb-24 italic text-purple-900/60 tracking-[0.2em]">La Travesía</h3>
+            <div class="relative space-y-16">
+                <div class="absolute left-1.5 top-0 bottom-0 w-px bg-purple-200"></div>
+                
+                <div class="flex gap-10 items-start reveal">
+                    <div class="itinerary-dot mt-1.5"></div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-400 tracking-[0.5em]">18:30 h</span>
+                        <h4 class="text-sm font-serif italic text-purple-900 uppercase tracking-widest mt-1">Misa de Acción de Gracias</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-10 items-start reveal">
+                    <div class="itinerary-dot mt-1.5" style="opacity: 0.5;"></div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-400 tracking-[0.5em]">19:30 h</span>
+                        <h4 class="text-sm font-serif italic text-purple-900 uppercase tracking-widest mt-1">Llegada al Salón</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-10 items-start reveal">
+                    <div class="itinerary-dot mt-1.5"></div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-400 tracking-[0.5em]">20:10 h</span>
+                        <h4 class="text-sm font-serif italic text-purple-900 uppercase tracking-widest mt-1">Vals de las Mariposas</h4>
+                    </div>
+                </div>
+
+                <div class="flex gap-10 items-start reveal">
+                    <div class="itinerary-dot mt-1.5 animate-pulse" style="background: var(--lumbrera-orange); box-shadow: 0 0 15px var(--lumbrera-orange);"></div>
+                    <div>
+                        <span class="text-[10px] font-bold text-purple-400 tracking-[0.5em]">21:00 h</span>
+                        <h4 class="text-sm font-serif italic text-purple-900 uppercase tracking-widest mt-1">Baile Encantado</h4>
+                    </div>
+                </div>
             </div>
-            <div class="mt-32 text-center text-[10px] italic text-purple-200/20 tracking-[0.7em] uppercase border-t border-purple-100/5 pt-12">“Trae calzado cómodo para bailar toda la noche”</div>
+            
+            <div class="mt-28 text-center text-[10px] italic text-purple-900/40 tracking-[0.5em] uppercase border-t border-purple-100 pt-10">
+                “Que nada detenga tus pasos, trae calzado cómodo”
+            </div>
         </div>
     </section>
 
     <!-- Código de Vestimenta -->
-    <section id="vestimenta" class="section-white py-36 px-6 relative overflow-hidden">
+    <section id="vestimenta" class="section-lavender py-36 px-6 relative overflow-hidden">
         <div class="max-w-2xl mx-auto text-center reveal">
             <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-12 text-purple-900 italic">Código de Vestimenta</h3>
-            <div class="card-magic p-12 border-t-8 border-purple-900 shadow-2xl">
-                <i class="fa-solid fa-user-tie text-4xl text-purple-900 mb-6"></i>
-                <h4 class="font-bold text-lg mb-4">Formal</h4>
-                <p class="text-gray-500 mb-10 text-sm leading-relaxed">Agradecemos tu elegancia para esta noche mágica. <br> Hemos sugerido una paleta de colores inspirada en el bosque:</p>
+            <div class="card-magic p-10 md:p-16 border-t-8 border-purple-900 shadow-2xl">
+                <i class="fa-solid fa-user-tie text-4xl text-purple-900 mb-8"></i>
+                <h4 class="font-bold text-xl mb-4 tracking-widest">FORMAL</h4>
+                <p class="text-gray-500 mb-12 text-sm leading-relaxed max-w-sm mx-auto italic">“Agradecemos tu elegancia para esta noche mágica rodeada de naturaleza.”</p>
                 
-                <div class="mb-12">
-                    <p class="font-bold text-[10px] uppercase tracking-widest text-purple-800 mb-6">Tonos sugeridos:</p>
-                    <div class="flex justify-center gap-4 flex-wrap">
-                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #2e7d32;"></div><span class="text-[8px] uppercase">Verdes</span></div>
-                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #1a237e;"></div><span class="text-[8px] uppercase">Azul Marino</span></div>
-                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #f5f5dc;"></div><span class="text-[8px] uppercase">Beige</span></div>
-                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #9e9e9e;"></div><span class="text-[8px] uppercase">Gris</span></div>
-                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #4e342e;"></div><span class="text-[8px] uppercase">Café</span></div>
+                <div class="mb-14">
+                    <p class="font-bold text-[10px] uppercase tracking-[0.3em] text-purple-800 mb-8">Tonos sugeridos:</p>
+                    <div class="flex justify-center gap-6 flex-wrap">
+                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #2e7d32;"></div><span class="text-[9px] uppercase tracking-tighter">Verdes</span></div>
+                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #1a237e;"></div><span class="text-[9px] uppercase tracking-tighter">Azul Marino</span></div>
+                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #f5f5dc;"></div><span class="text-[9px] uppercase tracking-tighter">Beige</span></div>
+                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #9e9e9e;"></div><span class="text-[9px] uppercase tracking-tighter">Gris</span></div>
+                        <div class="flex flex-col items-center gap-2"><div class="color-circle" style="background: #4e342e;"></div><span class="text-[9px] uppercase tracking-tighter">Café</span></div>
                     </div>
                 </div>
 
-                <div class="pt-8 border-t border-gray-100">
-                    <p class="font-serif text-xl italic text-gray-800 mb-6">Colores exclusivos de la quinceañera:</p>
-                    <div class="flex justify-center items-center gap-6 text-sm font-bold tracking-[0.2em]">
+                <div class="pt-10 border-t border-purple-50">
+                    <p class="font-serif text-2xl italic text-purple-900 mb-8">Colores exclusivos de la quinceañera:</p>
+                    <div class="flex justify-center items-center gap-8 text-sm font-bold tracking-[0.2em] text-purple-950">
                         <span class="flex items-center gap-2"><i class="fa-solid fa-wine-glass text-red-800"></i> Vino</span>
-                        <span>•</span>
+                        <span class="opacity-20 text-xs">|</span>
                         <span class="text-red-600">Rojo</span>
-                        <span>•</span>
+                        <span class="opacity-20 text-xs">|</span>
                         <span class="text-yellow-600 flex items-center gap-2">Dorado <i class="fa-solid fa-heart"></i></span>
                     </div>
                 </div>
@@ -401,46 +426,60 @@
         </div>
     </section>
 
-    <!-- Detalles Regalos y Sin Niños -->
-    <section id="regalos" class="section-dark py-32 px-6">
-        <div class="max-w-2xl mx-auto space-y-32">
+    <!-- Detalles y Sin Niños -->
+    <section id="regalos" class="section-light py-32 px-6">
+        <div class="max-w-2xl mx-auto space-y-28">
             <div class="text-center reveal">
-                <h3 class="font-serif text-4xl uppercase tracking-[0.5em] mb-10 text-purple-200/80 italic">Detalles</h3>
-                <div class="p-16 bg-purple-900/10 border border-purple-200/10 backdrop-blur-md relative shadow-inner">
-                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 lumbrera text-purple-600"><i class="fa-solid fa-gift text-4xl"></i></div>
-                    <p class="text-[11px] uppercase tracking-[0.5em] mb-6">Mesa de Regalos Liverpool</p>
-                    <p class="text-5xl font-serif text-white tracking-[0.3em] mb-12 italic">51936318</p>
-                    <p class="text-[11px] text-purple-200/40 tracking-[0.5em] uppercase italic">Contaremos con buzón de sobres en el salón</p>
+                <div class="mb-12 overflow-hidden card-magic h-72 border-4 border-white shadow-xl">
+                    <img src="https://i.imgur.com/9UFDaoN.jpg" alt="Regalos" class="w-full h-full object-cover grayscale-[30%]">
+                </div>
+                <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-10 text-purple-900 italic">Detalles</h3>
+                <div class="p-16 bg-purple-50/30 border border-purple-200/20 backdrop-blur-md relative shadow-inner">
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 lumbrera text-orange-400"><i class="fa-solid fa-sparkles text-3xl"></i></div>
+                    <p class="text-[11px] uppercase tracking-[0.5em] mb-6 text-purple-800/60 font-bold">Mesa de Regalos Liverpool</p>
+                    <p class="text-5xl font-serif text-purple-950 tracking-[0.2em] mb-12 italic">51936318</p>
+                    <p class="text-[10px] text-purple-400 tracking-[0.4em] uppercase italic font-bold">Contaremos con buzón de sobres en el salón</p>
                 </div>
             </div>
 
-            <div class="py-20 px-12 border-l-4 border-red-900/20 bg-red-950/10 text-center reveal shadow-2xl">
-                <h3 class="text-red-900 font-bold uppercase tracking-[0.8em] text-[10px] mb-10">Nota Importante</h3>
-                <p class="font-serif text-6xl italic text-red-950 mb-10">“Sin Niños”</p>
-                <p class="text-[12px] text-red-900/50 uppercase tracking-[0.3em] font-bold">Agradecemos tu comprensión, esta será una noche exclusiva para adultos.</p>
+            <!-- Sin Niños (Light) -->
+            <div class="py-16 px-10 border border-red-100 bg-red-50/30 text-center reveal shadow-lg">
+                <h3 class="text-red-900 font-bold uppercase tracking-[0.6em] text-[10px] mb-8">Nota Importante</h3>
+                <p class="font-serif text-5xl italic text-red-950 mb-8">“Sin Niños”</p>
+                <p class="text-[12px] text-red-900/60 uppercase tracking-[0.2em] leading-loose max-w-xs mx-auto font-bold">
+                    Agradecemos tu comprensión, esta será una noche mágica diseñada exclusivamente para adultos.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- RSVP -->
-    <section id="confirmar" class="section-dark py-56 text-center px-6 relative overflow-hidden">
+    <section id="confirmar" class="section-lavender py-48 text-center px-6 relative overflow-hidden">
         <div class="reveal relative z-10">
-            <h3 class="font-serif text-8xl italic mb-12 text-purple-100/80">Presencia</h3>
-            <p class="text-xl text-purple-200/30 mb-20 max-w-lg mx-auto italic px-6">
-                “Me encantaría compartir este sueño contigo. Por favor confirma tu presencia antes del <strong>6 de junio</strong>”
+            <h3 class="font-serif text-7xl italic mb-10 text-purple-900">Confirmación</h3>
+            <p class="text-lg text-purple-900/40 mb-16 max-w-md mx-auto italic px-6 font-light">
+                “Espero con ansias compartir este sueño contigo. Por favor confirma tu presencia antes del <strong>6 de junio</strong>”
             </p>
-            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia%20a%20tu%20festejo." target="_blank" class="btn-whatsapp">
-                <i class="fa-brands fa-whatsapp text-2xl"></i> CONFIRMAR ASISTENCIA
+            
+            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia%20a%20tus%20XV%20Años." target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                CONFIRMAR ASISTENCIA
             </a>
         </div>
     </section>
 
-    <footer class="bg-black py-28 text-center relative z-20">
-        <h2 class="font-serif text-6xl text-white italic mb-10">Romina</h2>
-        <p class="text-[10px] text-white/20 uppercase tracking-[0.8em]">M.M.X.X.V.I • El Destino Final</p>
+    <footer class="bg-white py-24 text-center relative z-20 border-t border-purple-50">
+        <h2 class="font-serif text-5xl text-purple-900 italic mb-6">Romina</h2>
+        <div class="flex justify-center gap-6 mb-8 opacity-20">
+            <div class="lumbrera text-orange-400 text-xs"><i class="fa-solid fa-fire"></i></div>
+            <i class="fa-solid fa-moon text-sm text-purple-900"></i>
+            <div class="lumbrera text-orange-400 text-xs" style="animation-delay: 2s;"><i class="fa-solid fa-fire"></i></div>
+        </div>
+        <p class="text-[9px] text-purple-900/30 uppercase tracking-[0.5em]">M.M.X.X.V.I • El Bosque Místico</p>
     </footer>
 
     <script>
+        // Luciérnagas / Fireflies
         const magicBox = document.getElementById('magic-elements');
         for (let i = 0; i < 45; i++) {
             const fly = document.createElement('div');
@@ -450,25 +489,31 @@
             fly.style.left = Math.random() * 100 + '%';
             fly.style.top = Math.random() * 100 + '%';
             fly.style.setProperty('--duration', Math.random() * 6 + 4 + 's');
-            fly.style.setProperty('--x', (Math.random() - 0.5) * 250 + 'px');
-            fly.style.setProperty('--y', (Math.random() - 0.5) * 250 + 'px');
+            fly.style.setProperty('--x', (Math.random() - 0.5) * 200 + 'px');
+            fly.style.setProperty('--y', (Math.random() - 0.5) * 200 + 'px');
             fly.style.animationDelay = Math.random() * 10 + 's';
             magicBox.appendChild(fly);
         }
 
-        const observer = new IntersectionObserver((entries) => {
+        // Reveal animations
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+        // Timer
         const target = new Date("July 11, 2026 18:30:00").getTime();
         function updateTimer() {
             const diff = target - new Date().getTime();
             const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
-            document.getElementById('timer').innerHTML = `<div class='timer-box'><span class='text-5xl font-serif text-white'>${d}</span><br><span class='text-[9px] uppercase tracking-widest text-silver/40'>Días</span></div><div class='timer-box'><span class='text-5xl font-serif text-white'>${h}</span><br><span class='text-[9px] uppercase tracking-widest text-silver/40'>Hrs</span></div><div class='timer-box'><span class='text-5xl font-serif text-white'>${m}</span><br><span class='text-[9px] uppercase tracking-widest text-silver/40'>Min</span></div><div class='timer-box'><span class='text-5xl font-serif text-white'>${s}</span><br><span class='text-[9px] uppercase tracking-widest text-silver/40'>Seg</span></div>`;
+            const timerEl = document.getElementById('timer');
+            if (timerEl) {
+                timerEl.innerHTML = `<div class='timer-box'><span class='text-4xl font-serif text-purple-900'>${d}</span><br><span class='text-[8px] uppercase tracking-widest text-purple-300'>Días</span></div><div class='timer-box'><span class='text-4xl font-serif text-purple-900'>${h}</span><br><span class='text-[8px] uppercase tracking-widest text-purple-300'>Horas</span></div><div class='timer-box'><span class='text-4xl font-serif text-purple-900'>${m}</span><br><span class='text-[8px] uppercase tracking-widest text-purple-300'>Min</span></div><div class='timer-box'><span class='text-4xl font-serif text-purple-900'>${s}</span><br><span class='text-[8px] uppercase tracking-widest text-purple-300'>Seg</span></div>`;
+            }
         }
         setInterval(updateTimer, 1000); updateTimer();
 
+        // Music player
         const audio = document.getElementById('player');
         const btn = document.getElementById('music-toggle');
         const icon = document.getElementById('music-icon');
@@ -478,6 +523,9 @@
             else { audio.play().catch(() => {}); icon.className = 'fa-solid fa-pause'; }
             playing = !playing;
         });
+
+        // Prevent iOS zoom
+        document.addEventListener('touchstart', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
     </script>
 </body>
 </html>
