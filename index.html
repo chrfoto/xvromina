@@ -4,37 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Años Romina</title>
+    
+    <!-- Meta Tags para previsualización en WhatsApp/GitHub -->
+    <meta property="og:title" content="Invitación XV Años - Romina">
+    <meta property="og:description" content="Acompáñame a celebrar este día tan especial.">
+    <meta property="og:image" content="https://i.imgur.com/1sFijb2.jpg">
+    <meta name="theme-color" content="#1b4332">
+
     <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Tailwind -->
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         :root {
             --bg-light: #ffffff;
-            --mint-soft: #f2f6f4; /* Menta muy apagado, casi gris */
+            --mint-soft: #f2f6f4;
             --mint-mist: #e2e8e5;
-            --emerald-accent: #3a5a40; /* Verde bosque mate */
-            --forest-deep: #1b4332; /* Verde bosque profundo */
-            --sage-green: #8da399; /* Verde salvia elegante */
-            --lantern-orange: #e67e22; /* Naranja quemado, menos brillante */
-            --butterfly-orange: #d35400; /* Naranja terracota para las mariposas */
+            --emerald-accent: #3a5a40;
+            --forest-deep: #1b4332;
+            --sage-green: #8da399; 
+            --lantern-orange: #e67e22;
+            --butterfly-orange: #d35400;
+        }
+
+        /* Soporte para Safari en iOS - Altura dinámica */
+        html, body {
+            height: 100%;
+            height: -webkit-fill-available;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-light);
             color: var(--forest-deep);
-            overflow: hidden; 
+            overflow: hidden; /* Se habilita al abrir la invitación */
+            -webkit-font-smoothing: antialiased;
         }
 
         .font-script { font-family: 'Great Vibes', cursive; }
         .font-serif { font-family: 'Playfair Display', serif; }
 
-        /* --- BIENVENIDA PANTALLA COMPLETA --- */
+        /* --- BIENVENIDA --- */
         #welcome-overlay {
             position: fixed;
             inset: 0;
@@ -76,11 +93,11 @@
             line-height: 1.1;
         }
 
-        /* --- SISTEMA DE ANIMACIONES --- */
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal-scale { opacity: 0; transform: scale(0.9); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        /* --- ANIMACIONES (Optimizado Safari) --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
+        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
+        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
+        .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
         
         .active { opacity: 1; transform: translate(0) scale(1); }
 
@@ -104,8 +121,8 @@
             gap: 12px;
             transition: all 0.3s ease;
             margin-top: 4rem;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn-welcome:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
 
         /* --- MARCOS FLORALES --- */
         .elegant-floral-frame {
@@ -142,13 +159,13 @@
             height: auto;
         }
 
-        /* --- DECORACIONES BOTÁNICAS --- */
+        /* --- DECORACIONES --- */
         .botanical-accent {
             position: absolute;
             pointer-events: none;
             z-index: 1;
             color: var(--sage-green);
-            opacity: 0.6;
+            opacity: 0.5;
             transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -157,20 +174,19 @@
         .vine-r { right: 0; top: 0; transform: translateX(30px) scaleX(-1); }
         .active.vine-l, .active.vine-r { transform: translateX(0) scaleX(var(--tw-scale-x, 1)); }
 
-        /* MARIPOSAS (Naranja Terracota) */
+        /* MARIPOSAS (Safari Hardware Accelerated) */
         .butterfly-container { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
         .butterfly { position: absolute; width: 30px; height: 30px; transform-style: preserve-3d; animation: fly var(--speed) infinite linear; }
         .wing { 
-            position: absolute; 
-            width: 15px; 
-            height: 25px; 
+            position: absolute; width: 15px; height: 25px; 
             background: var(--butterfly-orange); 
             border-radius: 50% 50% 0 50%; 
             opacity: 0.8;
-            border: 0.5px solid rgba(255, 255, 255, 0.2); 
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         .wing.left { transform-origin: right center; animation: flap-l 0.3s infinite ease-in-out; }
-        .wing.right { left: 15px; transform-origin: left center; border-radius: 50% 50% 50% 0; animation: flap-r 0.3s infinite ease-in-out; }
+        .wing.right { left: 15px; transform-origin: left center; animation: flap-r 0.3s infinite ease-in-out; }
         @keyframes flap-l { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(70deg); } }
         @keyframes flap-r { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(-70deg); } }
         @keyframes fly { 0% { transform: translate(-10vw, 100vh) rotate(0deg); } 100% { transform: translate(110vw, -10vh) rotate(20deg); } }
@@ -186,51 +202,48 @@
             justify-content: center;
             position: relative;
         }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.4) 100%);
+
+        /* Solución Parallax para Safari iOS */
+        @supports (-webkit-touch-callout: none) {
+            .hero-full { background-attachment: scroll; }
         }
 
-        /* --- BLOQUES DE ITINERARIO --- */
         .itinerary-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 1rem;
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             margin: 0 auto;
         }
 
         .itinerary-block {
             background-color: var(--mint-soft);
-            border-left: 3px solid var(--emerald-accent);
-            padding: 1.5rem;
+            border-left: 4px solid var(--emerald-accent);
+            padding: 1.25rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            transition: all 0.5s ease;
-        }
-        .itinerary-block:hover {
-            transform: translateX(10px);
-            background-color: var(--mint-mist);
+            transition: all 0.4s ease;
+            border-radius: 0 12px 12px 0;
         }
 
         .itinerary-time {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--emerald-accent);
-            min-width: 70px;
+            min-width: 65px;
             letter-spacing: 1px;
         }
 
         .itinerary-event {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--forest-deep);
         }
 
+        /* ASISTENCIA */
         #confirmar {
             background: linear-gradient(135deg, #ffffff 0%, var(--mint-soft) 100%);
             min-height: 80vh;
@@ -238,27 +251,46 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 6rem 1rem 12rem 1rem;
+            padding: 6rem 1rem 10rem 1rem;
             position: relative;
             z-index: 5;
+            text-align: center;
+        }
+
+        .btn-confirm {
+            background-color: var(--forest-deep);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centrado estricto */
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(27, 67, 50, 0.3);
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            width: fit-content;
+            text-decoration: none;
         }
     </style>
 </head>
-<body class="overflow-hidden">
+<body>
 
     <!-- BIENVENIDA -->
     <div id="welcome-overlay">
         <div class="welcome-content">
             <p class="font-script text-3xl md:text-5xl text-white opacity-90 mb-4">Mis XV Años</p>
             <h1 class="title-main">Romina</h1>
-            
             <button id="open-btn" class="btn-welcome mx-auto">
                 <i class="fa-solid fa-envelope-open text-xs"></i> ABRIR INVITACIÓN
             </button>
         </div>
     </div>
 
-    <!-- Capa de Mariposas -->
+    <!-- Mariposas -->
     <div class="butterfly-container" id="butterfly-box"></div>
 
     <!-- Música -->
@@ -271,13 +303,13 @@
     </button>
 
     <!-- Navegación -->
-    <nav class="fixed top-0 w-full z-[60] py-4 bg-white/90 backdrop-blur-md border-b border-mint-mist shadow-sm">
+    <nav class="fixed top-0 w-full z-[60] py-4 bg-white/90 backdrop-blur-md border-b border-mint-mist shadow-sm" style="-webkit-backdrop-filter: blur(10px);">
         <div class="flex justify-around items-center w-full max-w-4xl mx-auto px-2 text-forest-deep font-bold uppercase">
-            <a href="#inicio" class="text-[9px] tracking-widest">Inicio</a>
-            <a href="#donde" class="text-[9px] tracking-widest">Ubicación</a>
-            <a href="#itinerario" class="text-[9px] tracking-widest">Agenda</a>
-            <a href="#vestimenta" class="text-[9px] tracking-widest">Etiqueta</a>
-            <a href="#confirmar" class="text-[9px] tracking-widest">Asistencia</a>
+            <a href="#inicio" class="text-[8px] sm:text-[9px] tracking-widest">Inicio</a>
+            <a href="#donde" class="text-[8px] sm:text-[9px] tracking-widest">Ubicación</a>
+            <a href="#itinerario" class="text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
+            <a href="#vestimenta" class="text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
+            <a href="#confirmar" class="text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
         </div>
     </nav>
 
@@ -299,7 +331,6 @@
         <svg class="botanical-accent vine-full vine-l reveal" viewBox="0 0 120 450">
             <path d="M40,0 C60,100 20,250 40,450" fill="none" stroke="currentColor" stroke-width="0.8"/>
             <circle cx="35" cy="80" r="3" fill="currentColor" opacity="0.4"/>
-            <path d="M42,200 Q60,210 50,225" fill="none" stroke="currentColor" stroke-width="0.5"/>
             <circle cx="50" cy="225" r="4" fill="white" stroke="currentColor" stroke-width="0.3"/>
         </svg>
         
@@ -314,18 +345,12 @@
         </div>
     </section>
 
-    <!-- FOTO HORIZONTAL 1 -->
+    <!-- Foto 1: Caballo -->
     <section class="bg-white py-16 flex justify-center overflow-hidden relative">
         <div class="elegant-floral-frame reveal-scale">
             <div class="frame-lines"></div>
-            <svg class="corner-branch cb-tl" viewBox="0 0 100 100">
-                <path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/>
-                <circle cx="15" cy="70" r="1.5" fill="currentColor" opacity="0.5"/>
-            </svg>
-            <svg class="corner-branch cb-br" viewBox="0 0 100 100">
-                <path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/>
-                <circle cx="15" cy="70" r="1.5" fill="currentColor" opacity="0.5"/>
-            </svg>
+            <svg class="corner-branch cb-tl" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
+            <svg class="corner-branch cb-br" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
             <img src="https://i.imgur.com/rbqvLvl.jpg" class="framed-photo" alt="Romina y Caballo">
         </div>
     </section>
@@ -334,11 +359,10 @@
     <section class="py-24 px-6 bg-mint-soft overflow-hidden relative">
         <svg class="botanical-accent vine-full vine-r reveal" viewBox="0 0 120 450">
             <path d="M50,0 C30,150 70,300 50,450" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <path d="M55,100 Q80,110 70,130" fill="none" stroke="currentColor" stroke-width="0.5"/>
             <circle cx="70" cy="130" r="2.5" fill="currentColor"/>
         </svg>
 
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div class="reveal-left">
                 <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-sage-green mb-8 border-b border-sage-green/20 pb-4">Con la bendición de:</p>
                 <div class="space-y-10">
@@ -359,36 +383,8 @@
         </div>
     </section>
 
-    <!-- FOTO HORIZONTAL 2 -->
-    <section class="bg-white py-16 flex justify-center overflow-hidden">
-        <div class="elegant-floral-frame reveal-scale">
-            <div class="frame-lines"></div>
-            <svg class="corner-branch cb-tl" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
-            <img src="https://i.imgur.com/8ddBzK2.jpg" class="framed-photo" alt="Sesión Romina">
-        </div>
-    </section>
-
-    <!-- Ubicación -->
-    <section id="donde" class="py-24 bg-white text-center relative overflow-hidden">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="font-serif text-6xl mb-16 italic text-forest-deep reveal">Ubicación</h2>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="reveal-left stagger-1 p-10 bg-mint-soft border border-mint-mist rounded-2xl">
-                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Ceremonia • 18:30 h</p>
-                    <h4 class="font-serif text-2xl mb-10 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
-                </div>
-                <div class="reveal-right stagger-1 p-10 bg-mint-soft border border-mint-mist rounded-2xl">
-                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Recepción • 19:30 h</p>
-                    <h4 class="font-serif text-2xl mb-10 leading-tight">Salón “La Fortaleza”</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ITINERARIO: BLOQUES ELEGANTES -->
-    <section id="itinerario" class="py-24 bg-mint-soft/50 relative overflow-hidden">
+    <!-- Itinerario en Bloques -->
+    <section id="itinerario" class="py-24 bg-white relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-forest-deep reveal">Itinerario</h2>
             
@@ -399,20 +395,35 @@
                 </div>
                 <div class="itinerary-block reveal-right stagger-1">
                     <div class="itinerary-time">19:30 h</div>
-                    <div class="itinerary-event">Recepción de Invitados</div>
+                    <div class="itinerary-event">Recepción en el Salón</div>
                 </div>
                 <div class="itinerary-block reveal-left stagger-1">
                     <div class="itinerary-time">20:10 h</div>
-                    <div class="itinerary-event">Entrada y Vals</div>
+                    <div class="itinerary-event">Protocolo de Entrada y Vals</div>
                 </div>
                 <div class="itinerary-block reveal-right stagger-2">
                     <div class="itinerary-time">21:00 h</div>
-                    <div class="itinerary-event">¡Gran Baile!</div>
+                    <div class="itinerary-event">Cena y Gran Baile</div>
                 </div>
             </div>
-            
-            <div class="mt-16 text-center reveal stagger-3">
-                <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-sage-green italic">Me encantará verte en cada momento</p>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section id="donde" class="py-24 bg-mint-soft text-center relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="font-serif text-6xl mb-16 italic text-forest-deep reveal">Ubicación</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="reveal-left stagger-1 p-10 bg-white border border-mint-mist rounded-2xl shadow-sm">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Ceremonia</p>
+                    <h4 class="font-serif text-2xl mb-10 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
+                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
+                </div>
+                <div class="reveal-right stagger-1 p-10 bg-white border border-mint-mist rounded-2xl shadow-sm">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Recepción</p>
+                    <h4 class="font-serif text-2xl mb-10 leading-tight">Salón “La Fortaleza”</h4>
+                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
+                </div>
             </div>
         </div>
     </section>
@@ -424,13 +435,13 @@
             <div class="p-10 border border-white/10 bg-white/[0.02] rounded-3xl">
                 <p class="text-xs font-bold uppercase tracking-[0.3em] mb-8">Formal</p>
                 <div class="flex justify-center gap-6 flex-wrap mb-16">
-                    <div class="reveal-scale flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
-                    <div class="reveal-scale flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
-                    <div class="reveal-scale flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
-                    <div class="reveal-scale flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
-                    <div class="reveal-scale flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
                 </div>
-                <div class="pt-10 border-t border-white/10 reveal">
+                <div class="pt-10 border-t border-white/10">
                     <p class="font-serif text-xl italic text-white mb-6">Exclusivo Quinceañera:</p>
                     <div class="flex justify-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase">
                         <span class="text-red-300">Vino</span> | <span class="text-red-400">Rojo</span> | <span class="text-yellow-400">Dorado</span>
@@ -440,12 +451,11 @@
         </div>
     </section>
 
-    <!-- Detalles -->
+    <!-- Mesa de Regalos -->
     <section class="py-24 bg-white text-center relative overflow-hidden">
         <div class="flex justify-center mb-16 px-4">
             <div class="elegant-floral-frame reveal-scale">
                 <div class="frame-lines"></div>
-                <svg class="corner-branch cb-tl" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
                 <img src="https://i.imgur.com/ambJt7D.jpg" class="framed-photo" style="max-height: 450px;" alt="Detalle Romina">
             </div>
         </div>
@@ -453,7 +463,7 @@
         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
             <div class="reveal mb-24">
                 <h3 class="font-serif text-5xl mb-12 italic text-forest-deep">Detalles</h3>
-                <div class="p-12 md:p-20 bg-mint-soft border border-mint-mist rounded-3xl mx-auto max-w-2xl text-center">
+                <div class="p-12 md:p-20 bg-mint-soft border border-mint-mist rounded-3xl mx-auto max-w-2xl text-center shadow-inner">
                     <p class="text-lg mb-8 italic text-gray-500 font-serif">“Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo:”</p>
                     <p class="text-[11px] font-bold uppercase text-emerald-900 tracking-[0.5em] mb-2">Liverpool</p>
                     <p class="text-6xl md:text-7xl font-serif text-forest-deep mb-10 italic">51936318</p>
@@ -466,7 +476,7 @@
                 <div id="timer" class="flex justify-center gap-3 md:gap-8 flex-wrap"></div>
             </div>
 
-            <div class="reveal py-20 bg-mint-soft border-y border-mint-mist mb-24 rounded-[50px] text-center px-6">
+            <div class="reveal py-20 bg-mint-soft border border-mint-mist rounded-[50px] text-center px-6">
                 <p class="font-serif text-5xl italic text-forest-deep mb-6">“Velada de Gala”</p>
                 <p class="text-[11px] text-emerald-900/60 uppercase tracking-[0.3em] max-w-sm mx-auto leading-loose font-bold">
                     Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para los adultos.
@@ -475,10 +485,11 @@
         </div>
     </section>
 
-    <!-- Asistencia Final -->
+    <!-- Asistencia -->
     <section id="confirmar">
         <svg class="botanical-accent vine-full vine-l reveal" style="height: 500px; top: 0" viewBox="0 0 120 500">
             <path d="M60,0 C30,150 70,350 50,500" fill="none" stroke="currentColor" stroke-width="0.8"/>
+            <circle cx="55" cy="100" r="4" fill="white" stroke="currentColor" stroke-width="0.5"/>
         </svg>
 
         <div class="relative z-10 text-center text-forest-deep px-6 reveal">
@@ -486,8 +497,9 @@
             <p class="text-xl mb-16 max-w-md mx-auto italic font-light text-gray-500">
                 “Me encantaría compartir este sueño contigo. Por favor confirma tu asistencia antes del <strong>6 de junio</strong>.”
             </p>
-            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia." target="_blank" class="btn-welcome !bg-emerald-900 !text-white mx-auto shadow-2xl">
-                Confirmar vía WhatsApp
+            <!-- Botón WhatsApp Centrado -->
+            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia." target="_blank" class="btn-confirm shadow-2xl">
+                <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
             </a>
         </div>
     </section>
@@ -513,9 +525,7 @@
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     musicBtn.classList.remove('hidden');
-                }).catch(error => {
-                    console.log("Audio play blocked.");
-                });
+                }).catch(error => { console.log("Safari auto-play block bypass."); });
             }
         }
 
@@ -528,7 +538,7 @@
 
         const butterBox = document.getElementById('butterfly-box');
         if (butterBox) {
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 12; i++) {
                 const bfly = document.createElement('div');
                 bfly.className = 'butterfly';
                 bfly.innerHTML = '<div class="wing left"></div><div class="wing right"></div>';
@@ -540,18 +550,9 @@
             }
         }
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .botanical-accent').forEach(el => observer.observe(el));
 
@@ -573,7 +574,6 @@
             else { audio.play(); document.getElementById('music-icon').className = 'fa-solid fa-pause'; }
             playing = !playing;
         });
-
         document.addEventListener('touchstart', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
     </script>
 </body>
