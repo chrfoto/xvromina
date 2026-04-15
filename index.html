@@ -166,10 +166,18 @@
         }
         .active .floral-bloom { opacity: 0.4; transform: scale(1); }
 
-        /* MARIPOSAS */
+        /* MARIPOSAS (Cambiadas a naranja) */
         .butterfly-container { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
         .butterfly { position: absolute; width: 30px; height: 30px; transform-style: preserve-3d; animation: fly var(--speed) infinite linear; }
-        .wing { position: absolute; width: 15px; height: 25px; background: rgba(255, 255, 255, 0.8); border-radius: 50% 50% 0 50%; border: 0.5px solid #eee; }
+        .wing { 
+            position: absolute; 
+            width: 15px; 
+            height: 25px; 
+            background: rgba(255, 145, 0, 0.85); /* Naranja vibrante */
+            border-radius: 50% 50% 0 50%; 
+            border: 0.5px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 0 10px rgba(255, 145, 0, 0.4);
+        }
         .wing.left { transform-origin: right center; animation: flap-l 0.3s infinite ease-in-out; }
         .wing.right { left: 15px; transform-origin: left center; border-radius: 50% 50% 50% 0; animation: flap-r 0.3s infinite ease-in-out; }
         @keyframes flap-l { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(70deg); } }
@@ -219,7 +227,7 @@
 </head>
 <body class="overflow-hidden">
 
-    <!-- BIENVENIDA -->
+    <!-- BIENVENIDA: PANTALLA COMPLETA -->
     <div id="welcome-overlay">
         <div class="welcome-content">
             <h2 class="font-serif text-sm tracking-[0.6em] mb-4 uppercase opacity-90">Invitación Personal</h2>
@@ -289,7 +297,7 @@
         </div>
     </section>
 
-    <!-- FOTO HORIZONTAL 1: Caballo -->
+    <!-- FOTO HORIZONTAL 1 -->
     <section class="bg-white py-16 flex justify-center overflow-hidden relative">
         <div class="elegant-floral-frame reveal-scale">
             <div class="frame-lines"></div>
@@ -344,7 +352,7 @@
         </svg>
 
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="font-serif text-6xl mb-16 italic text-emerald-950 reveal">Ubicación</h2>
+            <h2 class="font-serif text-6xl mb-16 italic text-purple-950 reveal">Ubicación</h2>
             <div class="grid md:grid-cols-2 gap-10">
                 <div class="reveal-left stagger-1 p-10 bg-mint-soft/30 border border-emerald-50 rounded-2xl">
                     <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Ceremonia • 18:30 h</p>
@@ -360,7 +368,7 @@
         </div>
     </section>
 
-    <!-- Agenda / Itinerario -->
+    <!-- Itinerario -->
     <section id="itinerario" class="py-24 bg-[#fdfdfd] relative overflow-hidden">
         <div class="max-w-lg mx-auto px-6">
             <h3 class="font-serif text-6xl text-center mb-20 italic text-emerald-950 reveal">Itinerario</h3>
@@ -429,19 +437,19 @@
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="reveal text-center flex flex-col items-center mb-24">
+        <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+            <div class="reveal mb-24">
                 <h3 class="font-serif text-5xl mb-12 italic text-emerald-950">Detalles</h3>
-                <div class="p-12 md:p-20 bg-mint-soft/30 border border-emerald-50 rounded-3xl mx-auto max-w-2xl text-center">
+                <div class="p-12 md:p-20 bg-mint-soft/30 border border-purple-50 rounded-3xl mx-auto max-w-2xl text-center">
                     <p class="text-lg mb-8 italic text-gray-500 font-serif">“Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo:”</p>
-                    <p class="text-[11px] font-bold uppercase text-emerald-400 tracking-[0.5em] mb-2">Liverpool</p>
+                    <p class="text-[11px] font-bold uppercase text-purple-400 tracking-[0.5em] mb-2">Liverpool</p>
                     <p class="text-6xl md:text-7xl font-serif text-emerald-900 mb-10 italic">51936318</p>
                     <p class="text-[9px] text-gray-400 uppercase font-bold tracking-[0.4em]">Contaremos con buzón de sobres</p>
                 </div>
             </div>
 
             <div class="reveal py-20 border-y border-emerald-50 mb-24 text-center">
-                <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-12 text-emerald-900 italic">Faltan sólo...</h3>
+                <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-12 text-emerald-950 italic">Faltan sólo...</h3>
                 <div id="timer" class="flex justify-center gap-3 md:gap-8 flex-wrap"></div>
             </div>
 
@@ -542,7 +550,7 @@
             const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
             const timerEl = document.getElementById('timer');
             if (timerEl) {
-                timerEl.innerHTML = `<div class='bg-white p-4 min-w-[80px] border border-emerald-100 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div><div class='bg-white p-4 min-w-[80px] border border-emerald-100 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div><div class='bg-white p-4 min-w-[80px] border border-emerald-100 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div><div class='bg-white p-4 min-w-[80px] border border-emerald-100 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
+                timerEl.innerHTML = `<div class='bg-white p-4 min-w-[80px] border border-sage-green/20 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div><div class='bg-white p-4 min-w-[80px] border border-sage-green/20 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div><div class='bg-white p-4 min-w-[80px] border border-sage-green/20 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div><div class='bg-white p-4 min-w-[80px] border border-sage-green/20 shadow-sm'><span class='text-3xl block text-emerald-900 font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
