@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Años Romina</title>
     
-    <!-- Meta Tags para previsualización en WhatsApp/GitHub -->
+    <!-- Meta Tags para WhatsApp -->
     <meta property="og:title" content="Invitación XV Años - Romina">
-    <meta property="og:description" content="Acompáñame a celebrar este día tan especial.">
     <meta property="og:image" content="https://i.imgur.com/1sFijb2.jpg">
-    <meta name="theme-color" content="#1b4332">
+    <meta name="theme-color" content="#0d1a15">
 
     <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -24,32 +23,39 @@
     
     <style>
         :root {
-            --bg-light: #ffffff;
-            --mint-soft: #f2f6f4;
-            --mint-mist: #e2e8e5;
+            --bg-dark: #0d1a15; 
+            --text-light: #e8ded1;
+            --gold-muted: #c5a368;
             --emerald-accent: #3a5a40;
-            --forest-deep: #1b4332;
             --sage-green: #8da399; 
-            --lantern-orange: #e67e22;
             --butterfly-orange: #d35400;
         }
 
-        /* Soporte para Safari en iOS - Altura dinámica */
-        html, body {
-            height: 100%;
-            height: -webkit-fill-available;
-        }
+        html, body { height: 100%; height: -webkit-fill-available; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--forest-deep);
-            overflow: hidden; /* Se habilita al abrir la invitación */
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow: hidden; 
             -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* TEXTURA DE PAPEL LINO */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/linen.png");
+            opacity: 0.35;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .font-script { font-family: 'Great Vibes', cursive; }
         .font-serif { font-family: 'Playfair Display', serif; }
+        .font-bickham { font-family: 'Pinyon Script', cursive; font-size: 2.3rem; color: var(--gold-muted); }
 
         /* --- BIENVENIDA --- */
         #welcome-overlay {
@@ -70,211 +76,101 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.7) 100%);
             z-index: 1;
         }
 
-        #welcome-overlay.opened {
-            transform: translateY(-100%);
-        }
-
-        .welcome-content {
-            position: relative;
-            text-align: center;
-            color: white;
-            z-index: 10;
-        }
+        #welcome-overlay.opened { transform: translateY(-100%); }
+        .welcome-content { position: relative; text-align: center; color: white; z-index: 10; }
 
         .title-main {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(4rem, 15vw, 9rem);
             color: white;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.6);
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
             line-height: 1.1;
         }
 
-        /* --- ANIMACIONES (Optimizado Safari) --- */
+        /* --- ANIMACIONES --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
-        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
-        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
-        .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
-        
+        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .active { opacity: 1; transform: translate(0) scale(1); }
 
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-
-        /* --- BOTONES --- */
-        .btn-welcome {
-            background-color: #ffffff;
-            color: var(--forest-deep);
-            padding: 16px 45px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            margin-top: 4rem;
-            -webkit-tap-highlight-color: transparent;
-        }
-
         /* --- MARCOS FLORALES --- */
-        .elegant-floral-frame {
-            position: relative;
-            display: inline-block;
-            padding: 35px;
-            margin: 10px auto;
-        }
-        .frame-lines {
-            position: absolute;
-            inset: 15px;
-            border: 1px solid var(--sage-green);
-            pointer-events: none;
-            z-index: 3;
-            transition: all 1.5s ease;
-        }
-        .corner-branch {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            z-index: 4;
-            color: var(--sage-green);
-            pointer-events: none;
-            transition: all 1.5s ease;
-        }
+        .elegant-floral-frame { position: relative; display: inline-block; padding: 35px; margin: 10px auto; }
+        .frame-lines { position: absolute; inset: 15px; border: 1px solid var(--gold-muted); pointer-events: none; z-index: 3; opacity: 0.6; }
+        .corner-branch { position: absolute; width: 120px; height: 120px; z-index: 4; color: var(--gold-muted); pointer-events: none; }
         .cb-tl { top: -5px; left: -5px; opacity: 0.8; }
         .cb-br { bottom: -5px; right: -5px; transform: rotate(180deg); opacity: 0.8; }
-
-        .framed-photo {
-            position: relative;
-            z-index: 2;
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
+        .framed-photo { position: relative; z-index: 2; display: block; max-width: 100%; height: auto; border: 1px solid rgba(197, 163, 104, 0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
         /* --- DECORACIONES --- */
-        .botanical-accent {
-            position: absolute;
-            pointer-events: none;
-            z-index: 1;
-            color: var(--sage-green);
-            opacity: 0.5;
-            transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
+        .botanical-accent { position: absolute; pointer-events: none; z-index: 1; color: var(--gold-muted); opacity: 0.3; transition: all 2.5s ease; }
         .vine-full { height: 450px; width: 120px; }
         .vine-l { left: 0; top: 0; transform: translateX(-30px); }
         .vine-r { right: 0; top: 0; transform: translateX(30px) scaleX(-1); }
-        .active.vine-l, .active.vine-r { transform: translateX(0) scaleX(var(--tw-scale-x, 1)); }
+        .active.vine-l, .active.vine-r { transform: translateX(0) scaleX(1); }
 
-        /* MARIPOSAS (Safari Hardware Accelerated) */
+        /* MARIPOSAS */
         .butterfly-container { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
         .butterfly { position: absolute; width: 30px; height: 30px; transform-style: preserve-3d; animation: fly var(--speed) infinite linear; }
-        .wing { 
-            position: absolute; width: 15px; height: 25px; 
-            background: var(--butterfly-orange); 
-            border-radius: 50% 50% 0 50%; 
-            opacity: 0.8;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
+        .wing { position: absolute; width: 15px; height: 25px; background: var(--butterfly-orange); border-radius: 50% 50% 0 50%; opacity: 0.8; box-shadow: 0 0 10px rgba(211, 84, 0, 0.5); }
         .wing.left { transform-origin: right center; animation: flap-l 0.3s infinite ease-in-out; }
         .wing.right { left: 15px; transform-origin: left center; animation: flap-r 0.3s infinite ease-in-out; }
         @keyframes flap-l { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(70deg); } }
         @keyframes flap-r { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(-70deg); } }
         @keyframes fly { 0% { transform: translate(-10vw, 100vh) rotate(0deg); } 100% { transform: translate(110vw, -10vh) rotate(20deg); } }
 
-        /* PORTADA */
-        .hero-full {
-            height: 100vh;
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Solución Parallax para Safari iOS */
-        @supports (-webkit-touch-callout: none) {
-            .hero-full { background-attachment: scroll; }
-        }
-
-        .itinerary-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
+        /* --- ITINERARIO --- */
+        .itinerary-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; width: 100%; max-width: 450px; margin: 0 auto; }
         .itinerary-block {
-            background-color: var(--mint-soft);
-            border-left: 4px solid var(--emerald-accent);
-            padding: 1.25rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.04);
+            border-left: 2px solid var(--gold-muted);
+            padding: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             transition: all 0.4s ease;
-            border-radius: 0 12px 12px 0;
+            border-radius: 0 15px 15px 0;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
+        .itinerary-icon { color: var(--gold-muted); font-size: 1.3rem; width: 35px; text-align: center; }
+        .itinerary-time { font-weight: 700; font-size: 0.85rem; color: var(--gold-muted); min-width: 60px; }
+        .itinerary-event { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--text-light); }
 
-        .itinerary-time {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--emerald-accent);
-            min-width: 65px;
-            letter-spacing: 1px;
-        }
-
-        .itinerary-event {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--forest-deep);
-        }
-
-        /* ASISTENCIA */
-        #confirmar {
-            background: linear-gradient(135deg, #ffffff 0%, var(--mint-soft) 100%);
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 1rem 10rem 1rem;
-            position: relative;
-            z-index: 5;
-            text-align: center;
-        }
-
+        /* BOTÓN WHATSAPP */
         .btn-confirm {
-            background-color: var(--forest-deep);
-            color: white;
-            padding: 18px 40px;
+            background-color: var(--gold-muted);
+            color: #000;
+            padding: 20px 45px;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centrado estricto */
-            gap: 10px;
-            box-shadow: 0 10px 25px rgba(27, 67, 50, 0.3);
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            margin: 0 auto;
+            margin: 4rem auto 0;
             width: fit-content;
             text-decoration: none;
+            position: relative;
+            z-index: 10;
         }
+
+        #confirmar {
+            padding: 8rem 1rem 18rem 1rem; 
+            background-color: transparent;
+            position: relative;
+        }
+
+        nav { background: rgba(13, 26, 21, 0.9); border-bottom: 1px solid rgba(197, 163, 104, 0.15); -webkit-backdrop-filter: blur(10px); }
+        .nav-link { color: var(--text-light) !important; opacity: 0.7; }
     </style>
 </head>
 <body>
@@ -284,39 +180,38 @@
         <div class="welcome-content">
             <p class="font-script text-3xl md:text-5xl text-white opacity-90 mb-4">Mis XV Años</p>
             <h1 class="title-main">Romina</h1>
-            <button id="open-btn" class="btn-welcome mx-auto">
-                <i class="fa-solid fa-envelope-open text-xs"></i> ABRIR INVITACIÓN
+            <button id="open-btn" class="px-12 py-4 bg-white text-black rounded-full font-bold uppercase tracking-widest mt-10 shadow-2xl transition-transform active:scale-95">
+                ABRIR INVITACIÓN
             </button>
         </div>
     </div>
 
-    <!-- Mariposas -->
     <div class="butterfly-container" id="butterfly-box"></div>
 
-    <!-- Música -->
+    <!-- Música: Link de Dropbox optimizado para reproducción directa -->
     <audio id="player" loop preload="auto">
-        <source src="https://vocaroo.com/media/download/16EvCiErJ5Wt" type="audio/mpeg">
+        <source src="https://dl.dropboxusercontent.com/scl/fi/1kf60fq07vw21qftukjtq/Twilight-Soundtrack-Bellas-Lullaby.mp3?rlkey=yiag51ierd8sodlkhkvl5gqyy" type="audio/mpeg">
     </audio>
     
-    <button id="music-btn" class="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-white rounded-full flex items-center justify-center border border-mint-mist shadow-lg text-emerald-700 hidden">
+    <button id="music-btn" class="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border border-white/20 shadow-lg text-white hidden backdrop-blur-md">
         <i id="music-icon" class="fa-solid fa-pause"></i>
     </button>
 
     <!-- Navegación -->
-    <nav class="fixed top-0 w-full z-[60] py-4 bg-white/90 backdrop-blur-md border-b border-mint-mist shadow-sm" style="-webkit-backdrop-filter: blur(10px);">
-        <div class="flex justify-around items-center w-full max-w-4xl mx-auto px-2 text-forest-deep font-bold uppercase">
-            <a href="#inicio" class="text-[8px] sm:text-[9px] tracking-widest">Inicio</a>
-            <a href="#donde" class="text-[8px] sm:text-[9px] tracking-widest">Ubicación</a>
-            <a href="#itinerario" class="text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
-            <a href="#vestimenta" class="text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
-            <a href="#confirmar" class="text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
+    <nav class="fixed top-0 w-full z-[60] py-4">
+        <div class="flex justify-around items-center w-full max-w-4xl mx-auto px-2 font-bold uppercase">
+            <a href="#inicio" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Inicio</a>
+            <a href="#donde" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Ubicación</a>
+            <a href="#itinerario" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
+            <a href="#vestimenta" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
+            <a href="#confirmar" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
         </div>
     </nav>
 
     <!-- Portada Principal -->
-    <section id="inicio" class="hero-full" style="background-image: url('https://i.imgur.com/1sFijb2.jpg');">
-        <div class="hero-overlay"></div>
-        <div class="relative z-10 text-center px-6 reveal-scale active">
+    <section id="inicio" class="h-screen w-full bg-cover bg-center flex items-center justify-center relative" style="background-image: url('https://i.imgur.com/1sFijb2.jpg');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 text-center px-6 reveal active">
             <p class="font-script text-3xl md:text-5xl text-white opacity-90 mb-4 drop-shadow-lg">Mis XV Años</p>
             <h1 class="title-main">Romina</h1>
             <p class="font-serif italic text-lg md:text-2xl text-white mt-8 opacity-80 tracking-[0.3em]">11.07.2026</p>
@@ -326,82 +221,79 @@
         </div>
     </section>
 
-    <!-- Introducción -->
-    <section class="py-32 px-6 text-center bg-white relative border-b border-mint-mist overflow-hidden">
+    <!-- Frase Introductoria -->
+    <section class="py-32 px-6 text-center bg-transparent relative border-b border-white/5 overflow-hidden">
         <svg class="botanical-accent vine-full vine-l reveal" viewBox="0 0 120 450">
             <path d="M40,0 C60,100 20,250 40,450" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <circle cx="35" cy="80" r="3" fill="currentColor" opacity="0.4"/>
             <circle cx="50" cy="225" r="4" fill="white" stroke="currentColor" stroke-width="0.3"/>
         </svg>
         
         <div class="max-w-3xl mx-auto reveal relative z-10">
-            <p class="font-serif text-xl md:text-3xl italic leading-relaxed text-gray-700 px-4">
+            <p class="font-bickham leading-relaxed px-4">
                 “Mis XV años llegan llenos de sueños… y quiero invitarte a ser parte de esta celebración tan especial; me haría muy feliz que me acompañaras.”
             </p>
-            <div class="mt-12 h-px w-24 bg-sage-green/30 mx-auto"></div>
+            <div class="mt-12 h-px w-24 bg-gold-muted/30 mx-auto"></div>
         </div>
         <div class="absolute inset-0 opacity-5 pointer-events-none">
-            <img src="https://i.imgur.com/pmXGXHT.jpg" class="w-full h-full object-cover grayscale" alt="decor">
+            <img src="https://i.imgur.com/pmXGXHT.jpg" class="w-full h-full object-cover grayscale invert" alt="decor">
         </div>
     </section>
 
-    <!-- Foto 1: Caballo -->
-    <section class="bg-white py-16 flex justify-center overflow-hidden relative">
+    <!-- Foto 1 -->
+    <section class="py-16 flex justify-center overflow-hidden relative">
         <div class="elegant-floral-frame reveal-scale">
             <div class="frame-lines"></div>
             <svg class="corner-branch cb-tl" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
             <svg class="corner-branch cb-br" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
-            <img src="https://i.imgur.com/rbqvLvl.jpg" class="framed-photo" alt="Romina y Caballo">
+            <img src="https://i.imgur.com/rbqvLvl.jpg" class="framed-photo" alt="Romina">
         </div>
     </section>
 
     <!-- Padres -->
-    <section class="py-24 px-6 bg-mint-soft overflow-hidden relative">
-        <svg class="botanical-accent vine-full vine-r reveal" viewBox="0 0 120 450">
-            <path d="M50,0 C30,150 70,300 50,450" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <circle cx="70" cy="130" r="2.5" fill="currentColor"/>
-        </svg>
-
+    <section class="py-24 px-6 bg-[#0a1411] overflow-hidden relative">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div class="reveal-left">
-                <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-sage-green mb-8 border-b border-sage-green/20 pb-4">Con la bendición de:</p>
+                <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-gold-muted mb-8 border-b border-gold-muted/20 pb-4">Con la bendición de:</p>
                 <div class="space-y-10">
-                    <div class="reveal stagger-1">
-                        <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Mis Padres</p>
-                        <p class="text-3xl font-serif italic text-emerald-900">Alicia Ibeth Cornejo Medina</p>
-                        <p class="text-3xl font-serif italic text-emerald-900">Sergio Barajas Mondragón</p>
+                    <div class="reveal">
+                        <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mis Padres</p>
+                        <p class="text-3xl font-serif italic text-gold-muted">Alicia Ibeth Cornejo Medina</p>
+                        <p class="text-3xl font-serif italic text-gold-muted">Sergio Barajas Mondragón</p>
                     </div>
-                    <div class="reveal stagger-2">
-                        <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Mi Madrina</p>
-                        <p class="text-3xl font-serif italic text-emerald-900">Ma. Fernanda Rincón Medina</p>
+                    <div class="reveal">
+                        <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mi Madrina</p>
+                        <p class="text-3xl font-serif italic text-gold-muted">Ma. Fernanda Rincón Medina</p>
                     </div>
                 </div>
             </div>
             <div class="reveal-right">
-                <img src="https://i.imgur.com/yLFBiv0.jpg" alt="Familia" class="w-full h-[550px] object-cover shadow-2xl border-[15px] border-white">
+                <img src="https://i.imgur.com/yLFBiv0.jpg" alt="Familia" class="w-full h-[550px] object-cover border-[1px] border-white/20 grayscale transition-all duration-1000">
             </div>
         </div>
     </section>
 
-    <!-- Itinerario en Bloques -->
-    <section id="itinerario" class="py-24 bg-white relative overflow-hidden">
+    <!-- Itinerario -->
+    <section id="itinerario" class="py-24 relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-6">
-            <h2 class="font-serif text-6xl text-center mb-20 italic text-forest-deep reveal">Itinerario</h2>
-            
+            <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
             <div class="itinerary-grid">
                 <div class="itinerary-block reveal-left">
+                    <i class="fa-solid fa-church itinerary-icon"></i>
                     <div class="itinerary-time">18:30 h</div>
                     <div class="itinerary-event">Misa de Acción de Gracias</div>
                 </div>
-                <div class="itinerary-block reveal-right stagger-1">
+                <div class="itinerary-block reveal-right">
+                    <i class="fa-solid fa-house-chimney-window itinerary-icon"></i>
                     <div class="itinerary-time">19:30 h</div>
                     <div class="itinerary-event">Recepción en el Salón</div>
                 </div>
-                <div class="itinerary-block reveal-left stagger-1">
+                <div class="itinerary-block reveal-left">
+                    <i class="fa-solid fa-crown itinerary-icon"></i>
                     <div class="itinerary-time">20:10 h</div>
                     <div class="itinerary-event">Protocolo de Entrada y Vals</div>
                 </div>
-                <div class="itinerary-block reveal-right stagger-2">
+                <div class="itinerary-block reveal-right">
+                    <i class="fa-solid fa-music itinerary-icon"></i>
                     <div class="itinerary-time">21:00 h</div>
                     <div class="itinerary-event">Cena y Gran Baile</div>
                 </div>
@@ -410,95 +302,32 @@
     </section>
 
     <!-- Ubicación -->
-    <section id="donde" class="py-24 bg-mint-soft text-center relative overflow-hidden">
+    <section id="donde" class="py-24 bg-[#0a1411] text-center relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-6">
-            <h2 class="font-serif text-6xl mb-16 italic text-forest-deep reveal">Ubicación</h2>
+            <h2 class="font-serif text-6xl mb-16 italic text-gold-muted reveal">Ubicación</h2>
             <div class="grid md:grid-cols-2 gap-10">
-                <div class="reveal-left stagger-1 p-10 bg-white border border-mint-mist rounded-2xl shadow-sm">
-                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Ceremonia</p>
+                <div class="reveal-left p-10 bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-gold-muted">Ceremonia</p>
                     <h4 class="font-serif text-2xl mb-10 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
+                    <a href="https://maps.app.goo.gl/BhN4ArWCh85hMxDFA" target="_blank" class="text-[10px] font-bold uppercase border-b border-gold-muted pb-1 text-gold-muted">Ver en Mapa</a>
                 </div>
-                <div class="reveal-right stagger-1 p-10 bg-white border border-mint-mist rounded-2xl shadow-sm">
-                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-emerald-900">Recepción</p>
+                <div class="reveal-right p-10 bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-gold-muted">Recepción</p>
                     <h4 class="font-serif text-2xl mb-10 leading-tight">Salón “La Fortaleza”</h4>
-                    <a href="https://maps.google.com" target="_blank" class="text-[10px] font-bold uppercase border-b border-forest-deep pb-1">Ver en Mapa</a>
+                    <a href="https://maps.app.goo.gl/DhYPpGRKHuAKH1wW6" target="_blank" class="text-[10px] font-bold uppercase border-b border-gold-muted pb-1 text-gold-muted">Ver en Mapa</a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vestimenta -->
-    <section id="vestimenta" class="py-24 bg-emerald-950 text-white text-center relative overflow-hidden">
-        <div class="max-w-2xl mx-auto px-6 reveal">
-            <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-16 italic">Etiqueta</h3>
-            <div class="p-10 border border-white/10 bg-white/[0.02] rounded-3xl">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-8">Formal</p>
-                <div class="flex justify-center gap-6 flex-wrap mb-16">
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-lg" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
-                </div>
-                <div class="pt-10 border-t border-white/10">
-                    <p class="font-serif text-xl italic text-white mb-6">Exclusivo Quinceañera:</p>
-                    <div class="flex justify-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase">
-                        <span class="text-red-300">Vino</span> | <span class="text-red-400">Rojo</span> | <span class="text-yellow-400">Dorado</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mesa de Regalos -->
-    <section class="py-24 bg-white text-center relative overflow-hidden">
-        <div class="flex justify-center mb-16 px-4">
-            <div class="elegant-floral-frame reveal-scale">
-                <div class="frame-lines"></div>
-                <img src="https://i.imgur.com/ambJt7D.jpg" class="framed-photo" style="max-height: 450px;" alt="Detalle Romina">
-            </div>
-        </div>
-
-        <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-            <div class="reveal mb-24">
-                <h3 class="font-serif text-5xl mb-12 italic text-forest-deep">Detalles</h3>
-                <div class="p-12 md:p-20 bg-mint-soft border border-mint-mist rounded-3xl mx-auto max-w-2xl text-center shadow-inner">
-                    <p class="text-lg mb-8 italic text-gray-500 font-serif">“Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo:”</p>
-                    <p class="text-[11px] font-bold uppercase text-emerald-900 tracking-[0.5em] mb-2">Liverpool</p>
-                    <p class="text-6xl md:text-7xl font-serif text-forest-deep mb-10 italic">51936318</p>
-                    <p class="text-[9px] text-gray-400 uppercase font-bold tracking-[0.4em]">Contaremos con buzón de sobres</p>
-                </div>
-            </div>
-
-            <div class="reveal py-20 border-y border-mint-mist mb-24 text-center">
-                <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-12 text-forest-deep italic">Faltan sólo...</h3>
-                <div id="timer" class="flex justify-center gap-3 md:gap-8 flex-wrap"></div>
-            </div>
-
-            <div class="reveal py-20 bg-mint-soft border border-mint-mist rounded-[50px] text-center px-6">
-                <p class="font-serif text-5xl italic text-forest-deep mb-6">“Velada de Gala”</p>
-                <p class="text-[11px] text-emerald-900/60 uppercase tracking-[0.3em] max-w-sm mx-auto leading-loose font-bold">
-                    Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para los adultos.
-                </p>
             </div>
         </div>
     </section>
 
     <!-- Asistencia -->
     <section id="confirmar">
-        <svg class="botanical-accent vine-full vine-l reveal" style="height: 500px; top: 0" viewBox="0 0 120 500">
-            <path d="M60,0 C30,150 70,350 50,500" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <circle cx="55" cy="100" r="4" fill="white" stroke="currentColor" stroke-width="0.5"/>
-        </svg>
-
-        <div class="relative z-10 text-center text-forest-deep px-6 reveal">
-            <h3 class="font-serif text-7xl md:text-[8rem] italic mb-10">Asistencia</h3>
-            <p class="text-xl mb-16 max-w-md mx-auto italic font-light text-gray-500">
+        <div class="relative z-10 text-center px-6 reveal">
+            <h3 class="font-serif text-7xl md:text-[8rem] italic mb-10 text-gold-muted">Asistencia</h3>
+            <p class="text-xl mb-16 max-w-md mx-auto italic font-light text-white/60">
                 “Me encantaría compartir este sueño contigo. Por favor confirma tu asistencia antes del <strong>6 de junio</strong>.”
             </p>
-            <!-- Botón WhatsApp Centrado -->
-            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia." target="_blank" class="btn-confirm shadow-2xl">
+            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia." target="_blank" class="btn-confirm">
                 <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
             </a>
         </div>
@@ -506,9 +335,9 @@
 
     <!-- Footer -->
     <footer class="bg-cover bg-center h-[75vh] flex flex-col justify-start pt-20 text-center text-white relative" style="background-image: url('https://i.imgur.com/vdXvBur.jpg');">
-        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 reveal">
-            <h2 class="font-serif text-7xl md:text-9xl mb-6 italic">Romina</h2>
+            <h2 class="font-serif text-7xl md:text-9xl mb-6 italic text-gold-muted">Romina</h2>
             <p class="text-[10px] uppercase tracking-[0.8em] opacity-90">M.M.X.X.V.I</p>
         </div>
     </footer>
@@ -519,23 +348,30 @@
         const audio = document.getElementById('player');
         const musicBtn = document.getElementById('music-btn');
 
-        function playAudio() {
-            audio.load(); 
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
+        // ESTRATEGIA DE DESBLOQUEO DE AUDIO (Método Anel y Alfonso)
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 1. Comando inmediato de reproducción para Safari/iOS
+            audio.play().then(() => {
+                musicBtn.classList.remove('hidden');
+                console.log("Audio iniciado con éxito");
+            }).catch(error => {
+                console.warn("Reproducción bloqueada, intentando bypass silencioso...");
+                audio.muted = true;
+                audio.play().then(() => {
+                    setTimeout(() => { audio.muted = false; }, 100);
                     musicBtn.classList.remove('hidden');
-                }).catch(error => { console.log("Safari auto-play block bypass."); });
-            }
-        }
+                });
+            });
 
-        openBtn.addEventListener('click', () => {
+            // 2. Transición visual
             welcome.classList.add('opened');
             document.body.style.overflow = 'auto';
-            playAudio();
-            setTimeout(() => welcome.style.display = 'none', 1300);
+            setTimeout(() => { welcome.style.display = 'none'; }, 1300);
         });
 
+        // Mariposas
         const butterBox = document.getElementById('butterfly-box');
         if (butterBox) {
             for (let i = 0; i < 12; i++) {
@@ -552,21 +388,8 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .botanical-accent').forEach(el => observer.observe(el));
-
-        const target = new Date("July 11, 2026 18:30:00").getTime();
-        function updateTimer() {
-            const diff = target - Date.now();
-            if (diff < 0) return;
-            const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
-            const timerEl = document.getElementById('timer');
-            if (timerEl) {
-                timerEl.innerHTML = `<div class='bg-white p-4 min-w-[80px] border border-mint-mist shadow-sm'><span class='text-3xl block text-forest-deep font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div><div class='bg-white p-4 min-w-[80px] border border-mint-mist shadow-sm'><span class='text-3xl block text-forest-deep font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div><div class='bg-white p-4 min-w-[80px] border border-mint-mist shadow-sm'><span class='text-3xl block text-forest-deep font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div><div class='bg-white p-4 min-w-[80px] border border-mint-mist shadow-sm'><span class='text-3xl block text-forest-deep font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
-            }
-        }
-        setInterval(updateTimer, 1000); updateTimer();
 
         let playing = true;
         musicBtn.addEventListener('click', () => {
@@ -574,7 +397,6 @@
             else { audio.play(); document.getElementById('music-icon').className = 'fa-solid fa-pause'; }
             playing = !playing;
         });
-        document.addEventListener('touchstart', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
     </script>
 </body>
 </html>
