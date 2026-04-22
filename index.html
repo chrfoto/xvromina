@@ -52,7 +52,7 @@
             pointer-events: none;
         }
 
-        /* TEXTURA viRuWGc SOLICITADA */
+        /* TEXTURA viRuWGc */
         body::after {
             content: "";
             position: fixed;
@@ -155,18 +155,29 @@
         .splide__pagination__page.is-active { background: var(--gold-muted); }
 
         /* RESALTADO DE COLORES EXCLUSIVOS */
-        .color-badge {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+        .color-badge { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .color-circle { width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+
+        /* PASE PERSONAL ESTILO CARD */
+        #personal-pass-display {
+            display: none;
+            background: linear-gradient(135deg, #1a2e26 0%, #0d1a15 100%);
+            border: 2px solid var(--gold-muted);
+            border-radius: 25px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            max-width: 400px;
+            margin: 20px auto;
         }
-        .color-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.8);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+        #personal-pass-display::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(197, 163, 104, 0.3);
+            border-radius: 18px;
+            pointer-events: none;
         }
 
         /* BOTONES */
@@ -187,6 +198,7 @@
             margin: 4rem auto 0;
             width: fit-content;
             text-decoration: none;
+            cursor: pointer;
         }
 
         nav { background: rgba(13, 26, 21, 0.95); border-bottom: 1px solid rgba(197, 163, 104, 0.15); backdrop-filter: blur(10px); }
@@ -230,9 +242,8 @@
             <a href="#inicio" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Inicio</a>
             <a href="#galeria" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Galería</a>
             <a href="#itinerario" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
-            <a href="#vestimenta" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
-            <a href="#detalles" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Detalles</a>
             <a href="#confirmar" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
+            <a href="#detalles" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Detalles</a>
         </div>
     </nav>
 
@@ -300,7 +311,7 @@
         </div>
     </section>
 
-    <!-- Itinerario Actualizado -->
+    <!-- Itinerario -->
     <section id="itinerario" class="py-24 relative overflow-hidden bg-black/10">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
@@ -308,7 +319,6 @@
                 <div class="itinerary-block reveal"><i class="fa-solid fa-church itinerary-icon"></i><div class="itinerary-time">18:30 h</div><div class="itinerary-event">Misa de Acción de Gracias</div></div>
                 <div class="itinerary-block reveal"><i class="fa-solid fa-house-chimney-window itinerary-icon"></i><div class="itinerary-time">19:30 h</div><div class="itinerary-event">Recepción en el Salón</div></div>
                 <div class="itinerary-block reveal"><i class="fa-solid fa-crown itinerary-icon"></i><div class="itinerary-time">20:10 h</div><div class="itinerary-event">Protocolo de Entrada y Vals</div></div>
-                <!-- Cambio solicitado: Cena y Gran Baile a las 8:30 -->
                 <div class="itinerary-block reveal"><i class="fa-solid fa-music itinerary-icon"></i><div class="itinerary-time">20:30 h</div><div class="itinerary-event">Cena y Gran Baile</div></div>
             </div>
         </div>
@@ -339,7 +349,6 @@
             <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-12 italic text-gold-muted">Etiqueta</h3>
             <div class="p-10 border border-white/5 bg-white/[0.02] rounded-3xl backdrop-blur-md">
                 <p class="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-white/60">Formal / Gala</p>
-                
                 <div class="pt-6 border-t border-white/10">
                     <p class="font-serif text-xl italic text-gold-muted mb-8">Colores exclusivos de la Quinceañera:</p>
                     <div class="flex justify-center gap-10 flex-wrap">
@@ -356,13 +365,74 @@
                             <span class="text-[10px] font-bold tracking-widest uppercase text-white">Dorado</span>
                         </div>
                     </div>
-                    <p class="text-[9px] mt-10 opacity-40 italic tracking-widest">Agradecemos reservar estos tonos para la festejada.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Detalles y Mesa de Regalos Separada -->
+    <!-- ASISTENCIA Y GENERADOR DE PASES -->
+    <section id="confirmar" class="py-24 relative overflow-hidden bg-white/[0.02]">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal">
+            <h3 class="font-serif text-7xl italic mb-10 text-gold-muted">Asistencia</h3>
+            <p class="text-xl mb-12 italic font-light text-white/60">
+                “Me encantaría compartir este sueño contigo.”
+            </p>
+
+            <!-- MENSAJE NO NIÑOS (JUNTO AL GENERADOR) -->
+            <div class="reveal mb-12 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md max-w-md mx-auto">
+                <div class="text-gold-muted mb-4 text-3xl"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <p class="font-serif text-2xl italic text-gold-muted mb-4">“Velada de Gala”</p>
+                <p class="text-[11px] text-white/50 uppercase tracking-[0.2em] leading-relaxed font-bold">
+                    Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para el disfrute de los adultos.
+                </p>
+            </div>
+
+            <!-- FORMULARIO DE PASES -->
+            <div id="pass-form" class="max-w-md mx-auto space-y-6 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md">
+                <div class="text-left">
+                    <label class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Nombre del Invitado</label>
+                    <input type="text" id="guest-name" placeholder="Escribe tu nombre completo" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none transition-all">
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Número de Personas</label>
+                    <select id="guest-count" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none appearance-none transition-all">
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
+                    </select>
+                </div>
+                <button onclick="generatePass()" class="w-full bg-gold-muted text-black font-bold p-4 rounded-xl hover:scale-[1.02] transition-transform uppercase tracking-widest text-xs">
+                    Generar Pase Personal
+                </button>
+            </div>
+
+            <!-- VISTA DEL PASE (Para Captura) -->
+            <div id="personal-pass-display">
+                <div class="text-center relative z-10">
+                    <p class="font-script text-2xl text-gold-muted mb-2">Pase Personal</p>
+                    <h4 class="font-serif text-4xl text-white mb-6">Romina</h4>
+                    <div class="h-px w-20 bg-gold-muted/30 mx-auto mb-8"></div>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-2">Invitado Especial</p>
+                    <p id="display-name" class="font-serif text-2xl text-white italic mb-8"></p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-2">Válido para:</p>
+                    <p id="display-count" class="font-serif text-5xl text-gold-muted italic"></p>
+                    <p class="text-[9px] uppercase tracking-widest text-white/30 mt-12">11 de Julio, 2026 | Morelia, Mich.</p>
+                </div>
+            </div>
+
+            <p id="pass-instruction" class="hidden text-[10px] text-white/40 mt-6 uppercase tracking-widest italic animate-pulse">
+                Toma captura de pantalla a tu pase y presiona confirmar:
+            </p>
+
+            <a id="wa-btn" href="#" target="_blank" class="btn-confirm hidden">
+                <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
+            </a>
+        </div>
+    </section>
+
+    <!-- Detalles y Mesa de Regalos -->
     <section id="detalles" class="py-24 bg-transparent text-center relative overflow-hidden">
         <div class="flex justify-center mb-16 px-4">
             <div class="elegant-floral-frame reveal-scale">
@@ -374,54 +444,28 @@
         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
             <h3 class="font-serif text-5xl mb-12 italic text-gold-muted reveal">Detalles</h3>
 
-            <!-- Sobres -->
             <div class="reveal mb-16 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
-                <div class="text-gold-muted mb-6 text-5xl">
-                    <i class="fa-solid fa-envelope-open-text"></i>
-                </div>
+                <div class="text-gold-muted mb-6 text-5xl"><i class="fa-solid fa-envelope-open-text"></i></div>
                 <p class="text-lg italic text-white/80 font-serif leading-relaxed">
                     “Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo, contaremos con buzón de sobres en la recepción.”
                 </p>
             </div>
 
-            <!-- Mesa de Regalos Liverpool -->
             <div class="reveal mb-24 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
                 <p class="text-[11px] font-bold uppercase text-gold-muted tracking-[0.5em] mb-4">Mesa de Regalos Liverpool</p>
                 <div class="text-pink-400 mb-4 text-3xl"><i class="fa-solid fa-gift"></i></div>
                 <p class="text-6xl md:text-7xl font-serif text-white tracking-[0.1em] italic">51936318</p>
             </div>
 
-            <!-- Contador -->
             <div class="reveal py-20 border-y border-white/5 mb-24 text-center w-full">
                 <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-12 text-gold-muted italic">Faltan sólo...</h3>
                 <div id="timer" class="flex justify-center gap-4 flex-wrap"></div>
             </div>
-
-            <!-- Mensaje Adultos -->
-            <div class="reveal py-16 bg-white/5 border-y border-white/10 rounded-[50px] text-center px-6 backdrop-blur-lg max-w-2xl">
-                <p class="font-serif text-4xl italic text-gold-muted mb-6">“Velada de Gala”</p>
-                <p class="text-[11px] text-white/50 uppercase tracking-[0.3em] leading-loose font-bold">
-                    Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para el disfrute de los adultos.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Asistencia -->
-    <section id="confirmar">
-        <div class="relative z-10 text-center px-6 reveal">
-            <h3 class="font-serif text-7xl md:text-[8rem] italic mb-10 text-gold-muted">Asistencia</h3>
-            <p class="text-xl mb-16 max-w-md mx-auto italic font-light text-white/60">
-                “Me encantaría compartir este sueño contigo. Por favor confirma tu asistencia antes del <strong>6 de junio</strong>.”
-            </p>
-            <a href="https://wa.me/524433586727?text=Hola%20Romina,%20confirmo%20mi%20asistencia." target="_blank" class="btn-confirm">
-                <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
-            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-cover bg-center h-[75vh] flex flex-col justify-start pt-20 text-center text-white relative" style="background-image: url('https://i.imgur.com/vdXvBur.jpg');">
+    <footer class="bg-cover bg-center h-[60vh] flex flex-col justify-start pt-20 text-center text-white relative" style="background-image: url('https://i.imgur.com/vdXvBur.jpg');">
         <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 reveal">
             <h2 class="font-serif text-7xl md:text-9xl mb-6 italic text-gold-muted">Romina</h2>
@@ -438,31 +482,14 @@
         const musicBtn = document.getElementById('music-btn');
 
         document.addEventListener('DOMContentLoaded', function () {
-            new Splide('#image-carousel', {
-                type   : 'loop',
-                perPage: 1,
-                autoplay: true,
-                interval: 3000,
-                pauseOnHover: false,
-                arrows: false,
-                pagination: true
-            }).mount();
+            new Splide('#image-carousel', { type: 'loop', perPage: 1, autoplay: true, interval: 3000, arrows: false, pagination: true }).mount();
         });
 
         function forcePlay() {
-            // LÓGICA DE REPRODUCCIÓN DESDE EL SEGUNDO 30
             audio.currentTime = 30; 
-            audio.play().then(() => {
-                musicBtn.classList.remove('hidden');
-            }).catch(e => {
-                // Fallback para Safari/Móviles restrictivos
+            audio.play().then(() => { musicBtn.classList.remove('hidden'); }).catch(e => {
                 audio.muted = true;
-                audio.play().then(() => {
-                    setTimeout(() => { 
-                        audio.muted = false; 
-                        musicBtn.classList.remove('hidden');
-                    }, 200);
-                });
+                audio.play().then(() => { setTimeout(() => { audio.muted = false; musicBtn.classList.remove('hidden'); }, 200); });
             });
         }
 
@@ -470,16 +497,39 @@
             e.preventDefault();
             forcePlay();
             welcome.classList.add('opened');
-            document.body.style.overflow = 'auto';
             setTimeout(() => { welcome.style.display = 'none'; }, 1300);
         });
+
+        // --- LÓGICA DEL GENERADOR DE PASES ---
+        function generatePass() {
+            const name = document.getElementById('guest-name').value;
+            const count = document.getElementById('guest-count').value;
+            
+            if(name.trim() === "") {
+                alert("Por favor escribe tu nombre");
+                return;
+            }
+
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('display-count').innerText = count + (count == 1 ? " PERSONA" : " PERSONAS");
+            
+            document.getElementById('pass-form').style.display = 'none';
+            document.getElementById('personal-pass-display').style.display = 'block';
+            document.getElementById('pass-instruction').classList.remove('hidden');
+            
+            const waBtn = document.getElementById('wa-btn');
+            const message = encodeURIComponent(`¡Hola Romina! Confirmo mi asistencia para ${count} personas. Mi pase personal está a nombre de: ${name}. Ya tengo mi captura de pantalla.`);
+            waBtn.href = `https://wa.me/524433586727?text=${message}`;
+            waBtn.classList.remove('hidden');
+            
+            document.getElementById('confirmar').scrollIntoView({ behavior: 'smooth' });
+        }
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .reveal-scale').forEach(el => observer.observe(el));
 
-        // CONTADOR DINÁMICO
         const target = new Date("July 11, 2026 18:30:00").getTime();
         function updateTimer() {
             const diff = target - Date.now();
@@ -487,11 +537,7 @@
             const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
             const timerEl = document.getElementById('timer');
             if (timerEl) {
-                timerEl.innerHTML = `
-                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div>
-                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div>
-                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div>
-                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
+                timerEl.innerHTML = `<div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div><div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div><div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div><div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
