@@ -311,7 +311,7 @@
         </div>
     </section>
 
-    <!-- Itinerario -->
+    <!-- Itinerario Actualizado -->
     <section id="itinerario" class="py-24 relative overflow-hidden bg-black/10">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
@@ -370,7 +370,7 @@
         </div>
     </section>
 
-    <!-- ASISTENCIA Y GENERADOR DE PASES -->
+    <!-- ASISTENCIA Y GENERADOR DE PASES INTELIGENTE -->
     <section id="confirmar" class="py-24 relative overflow-hidden bg-white/[0.02]">
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h3 class="font-serif text-7xl italic mb-10 text-gold-muted">Asistencia</h3>
@@ -378,7 +378,6 @@
                 “Me encantaría compartir este sueño contigo.”
             </p>
 
-            <!-- MENSAJE NO NIÑOS (JUNTO AL GENERADOR) -->
             <div class="reveal mb-12 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md max-w-md mx-auto">
                 <div class="text-gold-muted mb-4 text-3xl"><i class="fa-solid fa-champagne-glasses"></i></div>
                 <p class="font-serif text-2xl italic text-gold-muted mb-4">“Velada de Gala”</p>
@@ -394,8 +393,9 @@
                     <input type="text" id="guest-name" placeholder="Escribe tu nombre completo" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none transition-all">
                 </div>
                 <div class="text-left">
-                    <label class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Número de Personas</label>
+                    <label id="label-count" class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Número de Personas</label>
                     <select id="guest-count" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none appearance-none transition-all">
+                        <!-- Las opciones se generarán dinámicamente -->
                         <option value="1">1 Persona</option>
                         <option value="2">2 Personas</option>
                         <option value="3">3 Personas</option>
@@ -408,7 +408,7 @@
                 </button>
             </div>
 
-            <!-- VISTA DEL PASE (Para Captura) -->
+            <!-- VISTA DEL PASE -->
             <div id="personal-pass-display">
                 <div class="text-center relative z-10">
                     <p class="font-script text-2xl text-gold-muted mb-2">Pase Personal</p>
@@ -481,9 +481,37 @@
         const audio = document.getElementById('player');
         const musicBtn = document.getElementById('music-btn');
 
-        document.addEventListener('DOMContentLoaded', function () {
+        // --- SISTEMA DE CONTROL DE PASES VÍA URL ---
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const invitado = urlParams.get('invitado'); // Parámetro 'invitado'
+            const pasesMax = urlParams.get('pases');    // Parámetro 'pases'
+
+            const nameInput = document.getElementById('guest-name');
+            const selectCount = document.getElementById('guest-count');
+            const labelCount = document.getElementById('label-count');
+
+            if (invitado) {
+                nameInput.value = invitado.replace(/\+/g, ' ');
+            }
+
+            if (pasesMax) {
+                const limit = parseInt(pasesMax);
+                labelCount.innerText = `Número de Personas (Máximo ${limit})`;
+                
+                // Limpiar opciones y regenerar según el límite del link
+                selectCount.innerHTML = "";
+                for(let i = 1; i <= limit; i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = `${i} Persona${i > 1 ? 's' : ''}`;
+                    selectCount.appendChild(opt);
+                }
+            }
+            
+            // Inicializar Carrusel
             new Splide('#image-carousel', { type: 'loop', perPage: 1, autoplay: true, interval: 3000, arrows: false, pagination: true }).mount();
-        });
+        };
 
         function forcePlay() {
             audio.currentTime = 30; 
@@ -500,7 +528,6 @@
             setTimeout(() => { welcome.style.display = 'none'; }, 1300);
         });
 
-        // --- LÓGICA DEL GENERADOR DE PASES ---
         function generatePass() {
             const name = document.getElementById('guest-name').value;
             const count = document.getElementById('guest-count').value;
