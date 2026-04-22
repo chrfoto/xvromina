@@ -52,7 +52,7 @@
             pointer-events: none;
         }
 
-        /* TEXTURA viRuWGc */
+        /* TEXTURA viRuWGc SOLICITADA */
         body::after {
             content: "";
             position: fixed;
@@ -108,7 +108,7 @@
         .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .active { opacity: 1; transform: translate(0) scale(1); }
 
-        /* --- MARCOS FOTOGRÁFICOS CORREGIDOS --- */
+        /* --- MARCOS FOTOGRÁFICOS --- */
         .elegant-floral-frame { position: relative; display: inline-block; padding: 30px; margin: 10px auto; }
         .frame-lines { position: absolute; inset: 15px; border: 1px solid var(--gold-muted); pointer-events: none; z-index: 3; opacity: 0.5; }
         .cb-tl { position: absolute; top: -5px; left: -5px; width: 100px; height: 100px; color: var(--gold-muted); opacity: 0.8; }
@@ -122,7 +122,6 @@
             height: auto; 
             border: 1px solid rgba(197, 163, 104, 0.2); 
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            /* Ajuste para no cortar rostros en fotos verticales */
             object-fit: cover;
             object-position: center top; 
         }
@@ -144,16 +143,31 @@
         .itinerary-time { font-weight: 700; font-size: 0.85rem; color: var(--gold-muted); min-width: 60px; }
         .itinerary-event { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--text-light); }
 
-        /* --- CARRUSEL CORREGIDO PARA VERTICALES --- */
+        /* --- CARRUSEL --- */
         .splide__slide img {
             width: 100%;
-            height: 600px; /* Un poco más alto para dar aire a las verticales */
+            height: 600px; 
             object-fit: cover;
-            object-position: center 20%; /* Enfoca el rostro que suele estar en el tercio superior */
+            object-position: center 20%; 
             border-radius: 20px;
             border: 1px solid rgba(197, 163, 104, 0.3);
         }
         .splide__pagination__page.is-active { background: var(--gold-muted); }
+
+        /* RESALTADO DE COLORES EXCLUSIVOS */
+        .color-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .color-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
 
         /* BOTONES */
         .btn-confirm {
@@ -217,6 +231,7 @@
             <a href="#galeria" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Galería</a>
             <a href="#itinerario" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
             <a href="#vestimenta" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
+            <a href="#detalles" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Detalles</a>
             <a href="#confirmar" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
         </div>
     </nav>
@@ -247,7 +262,7 @@
     <!-- Padres -->
     <section class="py-24 px-6 bg-black/20 overflow-hidden relative border-y border-white/5">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="reveal">
+            <div class="reveal text-center md:text-left">
                 <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-gold-muted mb-8 border-b border-gold-muted/20 pb-4">Con la bendición de:</p>
                 <div class="space-y-10">
                     <div>
@@ -267,11 +282,10 @@
         </div>
     </section>
 
-    <!-- GALERÍA DE FOTOS (CARRUSEL) -->
+    <!-- GALERÍA DE FOTOS -->
     <section id="galeria" class="py-24 relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="font-serif text-5xl text-center mb-16 italic text-gold-muted reveal">Momentos</h2>
-            
             <div id="image-carousel" class="splide reveal-scale">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -286,7 +300,7 @@
         </div>
     </section>
 
-    <!-- Itinerario -->
+    <!-- Itinerario Actualizado -->
     <section id="itinerario" class="py-24 relative overflow-hidden bg-black/10">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
@@ -294,8 +308,8 @@
                 <div class="itinerary-block reveal"><i class="fa-solid fa-church itinerary-icon"></i><div class="itinerary-time">18:30 h</div><div class="itinerary-event">Misa de Acción de Gracias</div></div>
                 <div class="itinerary-block reveal"><i class="fa-solid fa-house-chimney-window itinerary-icon"></i><div class="itinerary-time">19:30 h</div><div class="itinerary-event">Recepción en el Salón</div></div>
                 <div class="itinerary-block reveal"><i class="fa-solid fa-crown itinerary-icon"></i><div class="itinerary-time">20:10 h</div><div class="itinerary-event">Protocolo de Entrada y Vals</div></div>
-                <div class="itinerary-block reveal"><i class="fa-solid fa-utensils itinerary-icon"></i><div class="itinerary-time">20:30 h</div><div class="itinerary-event">Banquete</div></div>
-                <div class="itinerary-block reveal"><i class="fa-solid fa-music itinerary-icon"></i><div class="itinerary-time">21:00 h</div><div class="itinerary-event">Cena y Gran Baile</div></div>
+                <!-- Cambio solicitado: Cena y Gran Baile a las 8:30 -->
+                <div class="itinerary-block reveal"><i class="fa-solid fa-music itinerary-icon"></i><div class="itinerary-time">20:30 h</div><div class="itinerary-event">Cena y Gran Baile</div></div>
             </div>
         </div>
     </section>
@@ -319,50 +333,62 @@
         </div>
     </section>
 
-    <!-- Etiqueta -->
+    <!-- Etiqueta con Colores Resaltados -->
     <section id="vestimenta" class="py-24 bg-black/30 text-white text-center relative overflow-hidden">
         <div class="max-w-2xl mx-auto px-6 reveal">
             <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-12 italic text-gold-muted">Etiqueta</h3>
             <div class="p-10 border border-white/5 bg-white/[0.02] rounded-3xl backdrop-blur-md">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-8 text-white/60">Formal / Gala</p>
-                <div class="flex justify-center gap-6 flex-wrap mb-12 px-4">
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
-                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
-                </div>
-                <div class="pt-10 border-t border-white/10">
-                    <p class="font-serif text-xl italic text-gold-muted mb-6">Colores exclusivos de la Quinceañera:</p>
-                    <div class="flex justify-center gap-8 text-[10px] font-bold tracking-[0.2em] uppercase">
-                        <span class="text-red-800">Vino</span>
-                        <span class="text-red-600">Rojo</span>
-                        <span class="text-gold-muted">Dorado</span>
+                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-white/60">Formal / Gala</p>
+                
+                <div class="pt-6 border-t border-white/10">
+                    <p class="font-serif text-xl italic text-gold-muted mb-8">Colores exclusivos de la Quinceañera:</p>
+                    <div class="flex justify-center gap-10 flex-wrap">
+                        <div class="color-badge">
+                            <div class="color-circle" style="background: #641e16;"></div>
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Vino</span>
+                        </div>
+                        <div class="color-badge">
+                            <div class="color-circle" style="background: #922b21;"></div>
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Rojo</span>
+                        </div>
+                        <div class="color-badge">
+                            <div class="color-circle" style="background: linear-gradient(135deg, #d4af37, #f1c40f);"></div>
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Dorado</span>
+                        </div>
                     </div>
+                    <p class="text-[9px] mt-10 opacity-40 italic tracking-widest">Agradecemos reservar estos tonos para la festejada.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Detalles y Regalo -->
+    <!-- Detalles y Mesa de Regalos Separada -->
     <section id="detalles" class="py-24 bg-transparent text-center relative overflow-hidden">
         <div class="flex justify-center mb-16 px-4">
             <div class="elegant-floral-frame reveal-scale">
                 <div class="frame-lines"></div>
-                <!-- Foto vertical ajustada para que el rostro siempre sea visible -->
                 <img src="https://i.imgur.com/ambJt7D.jpg" class="framed-photo transition-all duration-1000" style="max-height: 600px; width: auto;" alt="Detalle Romina">
             </div>
         </div>
 
         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-            <div class="reveal mb-24 w-full">
-                <h3 class="font-serif text-5xl mb-12 italic text-gold-muted">Detalles</h3>
-                <div class="p-12 md:p-16 bg-white/5 border border-white/10 rounded-3xl mx-auto max-w-2xl text-center shadow-2xl backdrop-blur-md">
-                    <p class="text-lg mb-8 italic text-white/60 font-serif">“Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo:”</p>
-                    <p class="text-[11px] font-bold uppercase text-gold-muted tracking-[0.5em]">Liverpool</p>
-                    <p class="text-6xl md:text-7xl font-serif text-white tracking-[0.1em] italic">51936318</p>
-                    <p class="text-[9px] text-white/30 uppercase font-bold tracking-[0.4em] mt-4">Contaremos con buzón de sobres</p>
+            <h3 class="font-serif text-5xl mb-12 italic text-gold-muted reveal">Detalles</h3>
+
+            <!-- Sobres -->
+            <div class="reveal mb-16 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
+                <div class="text-gold-muted mb-6 text-5xl">
+                    <i class="fa-solid fa-envelope-open-text"></i>
                 </div>
+                <p class="text-lg italic text-white/80 font-serif leading-relaxed">
+                    “Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo, contaremos con buzón de sobres en la recepción.”
+                </p>
+            </div>
+
+            <!-- Mesa de Regalos Liverpool -->
+            <div class="reveal mb-24 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
+                <p class="text-[11px] font-bold uppercase text-gold-muted tracking-[0.5em] mb-4">Mesa de Regalos Liverpool</p>
+                <div class="text-pink-400 mb-4 text-3xl"><i class="fa-solid fa-gift"></i></div>
+                <p class="text-6xl md:text-7xl font-serif text-white tracking-[0.1em] italic">51936318</p>
             </div>
 
             <!-- Contador -->
@@ -424,12 +450,18 @@
         });
 
         function forcePlay() {
+            // LÓGICA DE REPRODUCCIÓN DESDE EL SEGUNDO 30
+            audio.currentTime = 30; 
             audio.play().then(() => {
                 musicBtn.classList.remove('hidden');
             }).catch(e => {
+                // Fallback para Safari/Móviles restrictivos
                 audio.muted = true;
                 audio.play().then(() => {
-                    setTimeout(() => { audio.muted = false; musicBtn.classList.remove('hidden'); }, 200);
+                    setTimeout(() => { 
+                        audio.muted = false; 
+                        musicBtn.classList.remove('hidden');
+                    }, 200);
                 });
             });
         }
@@ -447,6 +479,7 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .reveal-scale').forEach(el => observer.observe(el));
 
+        // CONTADOR DINÁMICO
         const target = new Date("July 11, 2026 18:30:00").getTime();
         function updateTimer() {
             const diff = target - Date.now();
