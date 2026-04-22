@@ -15,8 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
-    <!-- Iconos -->
+    <!-- Iconos y Carrusel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,11 +25,10 @@
     <style>
         :root {
             --bg-dark: #0d1a15; 
+            --bg-accent: #1a2e26;
             --text-light: #e8ded1;
             --gold-muted: #c5a368;
             --emerald-accent: #3a5a40;
-            --sage-green: #8da399; 
-            --butterfly-orange: #d35400;
         }
 
         html, body { height: 100%; height: -webkit-fill-available; }
@@ -37,18 +37,30 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
-            overflow: hidden; 
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             position: relative;
         }
 
-        /* TEXTURA DE PAPEL LINO */
+        /* FONDO BASE GRADIENTE */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/linen.png");
-            opacity: 0.35;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #050a08 100%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* TEXTURA viRuWGc */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://i.imgur.com/viRuWGc.png");
+            background-size: 600px;
+            background-repeat: repeat;
+            opacity: 0.12; 
             z-index: -1;
             pointer-events: none;
         }
@@ -85,43 +97,35 @@
 
         .title-main {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(4rem, 15vw, 9rem);
+            font-size: clamp(4.5rem, 18vw, 10rem);
             color: white;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
             line-height: 1.1;
         }
 
         /* --- ANIMACIONES --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); will-change: transform, opacity; }
-        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .active { opacity: 1; transform: translate(0) scale(1); }
 
-        /* --- MARCOS FLORALES --- */
-        .elegant-floral-frame { position: relative; display: inline-block; padding: 35px; margin: 10px auto; }
-        .frame-lines { position: absolute; inset: 15px; border: 1px solid var(--gold-muted); pointer-events: none; z-index: 3; opacity: 0.6; }
-        .corner-branch { position: absolute; width: 120px; height: 120px; z-index: 4; color: var(--gold-muted); pointer-events: none; }
-        .cb-tl { top: -5px; left: -5px; opacity: 0.8; }
-        .cb-br { bottom: -5px; right: -5px; transform: rotate(180deg); opacity: 0.8; }
-        .framed-photo { position: relative; z-index: 2; display: block; max-width: 100%; height: auto; border: 1px solid rgba(197, 163, 104, 0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-
-        /* --- DECORACIONES --- */
-        .botanical-accent { position: absolute; pointer-events: none; z-index: 1; color: var(--gold-muted); opacity: 0.3; transition: all 2.5s ease; }
-        .vine-full { height: 450px; width: 120px; }
-        .vine-l { left: 0; top: 0; transform: translateX(-30px); }
-        .vine-r { right: 0; top: 0; transform: translateX(30px) scaleX(-1); }
-        .active.vine-l, .active.vine-r { transform: translateX(0) scaleX(1); }
-
-        /* MARIPOSAS */
-        .butterfly-container { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
-        .butterfly { position: absolute; width: 30px; height: 30px; transform-style: preserve-3d; animation: fly var(--speed) infinite linear; }
-        .wing { position: absolute; width: 15px; height: 25px; background: var(--butterfly-orange); border-radius: 50% 50% 0 50%; opacity: 0.8; box-shadow: 0 0 10px rgba(211, 84, 0, 0.5); }
-        .wing.left { transform-origin: right center; animation: flap-l 0.3s infinite ease-in-out; }
-        .wing.right { left: 15px; transform-origin: left center; animation: flap-r 0.3s infinite ease-in-out; }
-        @keyframes flap-l { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(70deg); } }
-        @keyframes flap-r { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(-70deg); } }
-        @keyframes fly { 0% { transform: translate(-10vw, 100vh) rotate(0deg); } 100% { transform: translate(110vw, -10vh) rotate(20deg); } }
+        /* --- MARCOS FOTOGRÁFICOS CORREGIDOS --- */
+        .elegant-floral-frame { position: relative; display: inline-block; padding: 30px; margin: 10px auto; }
+        .frame-lines { position: absolute; inset: 15px; border: 1px solid var(--gold-muted); pointer-events: none; z-index: 3; opacity: 0.5; }
+        .cb-tl { position: absolute; top: -5px; left: -5px; width: 100px; height: 100px; color: var(--gold-muted); opacity: 0.8; }
+        .cb-br { position: absolute; bottom: -5px; right: -5px; width: 100px; height: 100px; color: var(--gold-muted); transform: rotate(180deg); opacity: 0.8; }
+        
+        .framed-photo { 
+            position: relative; 
+            z-index: 2; 
+            display: block; 
+            max-width: 100%; 
+            height: auto; 
+            border: 1px solid rgba(197, 163, 104, 0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            /* Ajuste para no cortar rostros en fotos verticales */
+            object-fit: cover;
+            object-position: center top; 
+        }
 
         /* --- ITINERARIO --- */
         .itinerary-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; width: 100%; max-width: 450px; margin: 0 auto; }
@@ -134,14 +138,24 @@
             gap: 1.2rem;
             transition: all 0.4s ease;
             border-radius: 0 15px 15px 0;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
         .itinerary-icon { color: var(--gold-muted); font-size: 1.3rem; width: 35px; text-align: center; }
         .itinerary-time { font-weight: 700; font-size: 0.85rem; color: var(--gold-muted); min-width: 60px; }
         .itinerary-event { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--text-light); }
 
-        /* BOTÓN WHATSAPP */
+        /* --- CARRUSEL CORREGIDO PARA VERTICALES --- */
+        .splide__slide img {
+            width: 100%;
+            height: 600px; /* Un poco más alto para dar aire a las verticales */
+            object-fit: cover;
+            object-position: center 20%; /* Enfoca el rostro que suele estar en el tercio superior */
+            border-radius: 20px;
+            border: 1px solid rgba(197, 163, 104, 0.3);
+        }
+        .splide__pagination__page.is-active { background: var(--gold-muted); }
+
+        /* BOTONES */
         .btn-confirm {
             background-color: var(--gold-muted);
             color: #000;
@@ -159,18 +173,19 @@
             margin: 4rem auto 0;
             width: fit-content;
             text-decoration: none;
-            position: relative;
-            z-index: 10;
         }
 
-        #confirmar {
-            padding: 8rem 1rem 18rem 1rem; 
-            background-color: transparent;
-            position: relative;
-        }
-
-        nav { background: rgba(13, 26, 21, 0.9); border-bottom: 1px solid rgba(197, 163, 104, 0.15); -webkit-backdrop-filter: blur(10px); }
+        nav { background: rgba(13, 26, 21, 0.95); border-bottom: 1px solid rgba(197, 163, 104, 0.15); backdrop-filter: blur(10px); }
         .nav-link { color: var(--text-light) !important; opacity: 0.7; }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            min-width: 85px;
+            border: 1px solid rgba(197, 163, 104, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
     </style>
 </head>
 <body>
@@ -186,9 +201,7 @@
         </div>
     </div>
 
-    <div class="butterfly-container" id="butterfly-box"></div>
-
-    <!-- Música: Link de Dropbox optimizado para reproducción directa -->
+    <!-- Música -->
     <audio id="player" loop preload="auto">
         <source src="https://dl.dropboxusercontent.com/scl/fi/1kf60fq07vw21qftukjtq/Twilight-Soundtrack-Bellas-Lullaby.mp3?rlkey=yiag51ierd8sodlkhkvl5gqyy" type="audio/mpeg">
     </audio>
@@ -201,7 +214,7 @@
     <nav class="fixed top-0 w-full z-[60] py-4">
         <div class="flex justify-around items-center w-full max-w-4xl mx-auto px-2 font-bold uppercase">
             <a href="#inicio" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Inicio</a>
-            <a href="#donde" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Ubicación</a>
+            <a href="#galeria" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Galería</a>
             <a href="#itinerario" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Agenda</a>
             <a href="#vestimenta" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Etiqueta</a>
             <a href="#confirmar" class="nav-link text-[8px] sm:text-[9px] tracking-widest">Asistencia</a>
@@ -215,107 +228,155 @@
             <p class="font-script text-3xl md:text-5xl text-white opacity-90 mb-4 drop-shadow-lg">Mis XV Años</p>
             <h1 class="title-main">Romina</h1>
             <p class="font-serif italic text-lg md:text-2xl text-white mt-8 opacity-80 tracking-[0.3em]">11.07.2026</p>
-            <div class="mt-16 animate-bounce opacity-70">
+            <div class="mt-16 animate-bounce opacity-50">
                 <i class="fa-solid fa-chevron-down text-2xl text-white"></i>
             </div>
         </div>
     </section>
 
     <!-- Frase Introductoria -->
-    <section class="py-32 px-6 text-center bg-transparent relative border-b border-white/5 overflow-hidden">
-        <svg class="botanical-accent vine-full vine-l reveal" viewBox="0 0 120 450">
-            <path d="M40,0 C60,100 20,250 40,450" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <circle cx="50" cy="225" r="4" fill="white" stroke="currentColor" stroke-width="0.3"/>
-        </svg>
-        
+    <section class="py-32 px-6 text-center bg-transparent relative border-b border-white/5">
         <div class="max-w-3xl mx-auto reveal relative z-10">
-            <p class="font-bickham leading-relaxed px-4">
+            <p class="font-bickham leading-relaxed px-4 text-gold-muted">
                 “Mis XV años llegan llenos de sueños… y quiero invitarte a ser parte de esta celebración tan especial; me haría muy feliz que me acompañaras.”
             </p>
             <div class="mt-12 h-px w-24 bg-gold-muted/30 mx-auto"></div>
         </div>
-        <div class="absolute inset-0 opacity-5 pointer-events-none">
-            <img src="https://i.imgur.com/pmXGXHT.jpg" class="w-full h-full object-cover grayscale invert" alt="decor">
-        </div>
-    </section>
-
-    <!-- Foto 1 -->
-    <section class="py-16 flex justify-center overflow-hidden relative">
-        <div class="elegant-floral-frame reveal-scale">
-            <div class="frame-lines"></div>
-            <svg class="corner-branch cb-tl" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
-            <svg class="corner-branch cb-br" viewBox="0 0 100 100"><path d="M10,80 Q20,40 50,20 T90,10" fill="none" stroke="currentColor" stroke-width="0.8"/></svg>
-            <img src="https://i.imgur.com/rbqvLvl.jpg" class="framed-photo" alt="Romina">
-        </div>
     </section>
 
     <!-- Padres -->
-    <section class="py-24 px-6 bg-[#0a1411] overflow-hidden relative">
+    <section class="py-24 px-6 bg-black/20 overflow-hidden relative border-y border-white/5">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="reveal-left">
+            <div class="reveal">
                 <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-gold-muted mb-8 border-b border-gold-muted/20 pb-4">Con la bendición de:</p>
                 <div class="space-y-10">
-                    <div class="reveal">
+                    <div>
                         <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mis Padres</p>
                         <p class="text-3xl font-serif italic text-gold-muted">Alicia Ibeth Cornejo Medina</p>
                         <p class="text-3xl font-serif italic text-gold-muted">Sergio Barajas Mondragón</p>
                     </div>
-                    <div class="reveal">
+                    <div>
                         <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mi Madrina</p>
                         <p class="text-3xl font-serif italic text-gold-muted">Ma. Fernanda Rincón Medina</p>
                     </div>
                 </div>
             </div>
-            <div class="reveal-right">
-                <img src="https://i.imgur.com/yLFBiv0.jpg" alt="Familia" class="w-full h-[550px] object-cover border-[1px] border-white/20 grayscale transition-all duration-1000">
+            <div class="reveal">
+                <img src="https://i.imgur.com/yLFBiv0.jpg" alt="Familia" class="w-full h-[550px] object-cover border-[1px] border-white/20 transition-all duration-1000 shadow-2xl rounded-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE FOTOS (CARRUSEL) -->
+    <section id="galeria" class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="font-serif text-5xl text-center mb-16 italic text-gold-muted reveal">Momentos</h2>
+            
+            <div id="image-carousel" class="splide reveal-scale">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><img src="https://i.imgur.com/Gijtu3n.jpg" alt="Romina 1"></li>
+                        <li class="splide__slide"><img src="https://i.imgur.com/QHUwnxF.jpg" alt="Romina 2"></li>
+                        <li class="splide__slide"><img src="https://i.imgur.com/MYy4IH8.jpg" alt="Romina 3"></li>
+                        <li class="splide__slide"><img src="https://i.imgur.com/8IQaYES.jpg" alt="Romina 4"></li>
+                        <li class="splide__slide"><img src="https://i.imgur.com/3RGFPbF.jpg" alt="Romina 5"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Itinerario -->
-    <section id="itinerario" class="py-24 relative overflow-hidden">
+    <section id="itinerario" class="py-24 relative overflow-hidden bg-black/10">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
             <div class="itinerary-grid">
-                <div class="itinerary-block reveal-left">
-                    <i class="fa-solid fa-church itinerary-icon"></i>
-                    <div class="itinerary-time">18:30 h</div>
-                    <div class="itinerary-event">Misa de Acción de Gracias</div>
-                </div>
-                <div class="itinerary-block reveal-right">
-                    <i class="fa-solid fa-house-chimney-window itinerary-icon"></i>
-                    <div class="itinerary-time">19:30 h</div>
-                    <div class="itinerary-event">Recepción en el Salón</div>
-                </div>
-                <div class="itinerary-block reveal-left">
-                    <i class="fa-solid fa-crown itinerary-icon"></i>
-                    <div class="itinerary-time">20:10 h</div>
-                    <div class="itinerary-event">Protocolo de Entrada y Vals</div>
-                </div>
-                <div class="itinerary-block reveal-right">
-                    <i class="fa-solid fa-music itinerary-icon"></i>
-                    <div class="itinerary-time">21:00 h</div>
-                    <div class="itinerary-event">Cena y Gran Baile</div>
-                </div>
+                <div class="itinerary-block reveal"><i class="fa-solid fa-church itinerary-icon"></i><div class="itinerary-time">18:30 h</div><div class="itinerary-event">Misa de Acción de Gracias</div></div>
+                <div class="itinerary-block reveal"><i class="fa-solid fa-house-chimney-window itinerary-icon"></i><div class="itinerary-time">19:30 h</div><div class="itinerary-event">Recepción en el Salón</div></div>
+                <div class="itinerary-block reveal"><i class="fa-solid fa-crown itinerary-icon"></i><div class="itinerary-time">20:10 h</div><div class="itinerary-event">Protocolo de Entrada y Vals</div></div>
+                <div class="itinerary-block reveal"><i class="fa-solid fa-utensils itinerary-icon"></i><div class="itinerary-time">20:30 h</div><div class="itinerary-event">Banquete</div></div>
+                <div class="itinerary-block reveal"><i class="fa-solid fa-music itinerary-icon"></i><div class="itinerary-time">21:00 h</div><div class="itinerary-event">Cena y Gran Baile</div></div>
             </div>
         </div>
     </section>
 
     <!-- Ubicación -->
-    <section id="donde" class="py-24 bg-[#0a1411] text-center relative overflow-hidden">
+    <section id="donde" class="py-24 bg-black/10 text-center relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-6">
             <h2 class="font-serif text-6xl mb-16 italic text-gold-muted reveal">Ubicación</h2>
             <div class="grid md:grid-cols-2 gap-10">
-                <div class="reveal-left p-10 bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+                <div class="reveal p-10 bg-white/5 border border-white/10 rounded-2xl shadow-xl">
                     <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-gold-muted">Ceremonia</p>
                     <h4 class="font-serif text-2xl mb-10 leading-tight">Rectoría de Ntra. Sra. de la Soledad</h4>
                     <a href="https://maps.app.goo.gl/BhN4ArWCh85hMxDFA" target="_blank" class="text-[10px] font-bold uppercase border-b border-gold-muted pb-1 text-gold-muted">Ver en Mapa</a>
                 </div>
-                <div class="reveal-right p-10 bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+                <div class="reveal p-10 bg-white/5 border border-white/10 rounded-2xl shadow-xl">
                     <p class="text-[11px] font-bold uppercase tracking-[0.4em] mb-4 text-gold-muted">Recepción</p>
                     <h4 class="font-serif text-2xl mb-10 leading-tight">Salón “La Fortaleza”</h4>
                     <a href="https://maps.app.goo.gl/DhYPpGRKHuAKH1wW6" target="_blank" class="text-[10px] font-bold uppercase border-b border-gold-muted pb-1 text-gold-muted">Ver en Mapa</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Etiqueta -->
+    <section id="vestimenta" class="py-24 bg-black/30 text-white text-center relative overflow-hidden">
+        <div class="max-w-2xl mx-auto px-6 reveal">
+            <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-12 italic text-gold-muted">Etiqueta</h3>
+            <div class="p-10 border border-white/5 bg-white/[0.02] rounded-3xl backdrop-blur-md">
+                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-8 text-white/60">Formal / Gala</p>
+                <div class="flex justify-center gap-6 flex-wrap mb-12 px-4">
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
+                    <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full shadow-xl border border-white/10" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
+                </div>
+                <div class="pt-10 border-t border-white/10">
+                    <p class="font-serif text-xl italic text-gold-muted mb-6">Colores exclusivos de la Quinceañera:</p>
+                    <div class="flex justify-center gap-8 text-[10px] font-bold tracking-[0.2em] uppercase">
+                        <span class="text-red-800">Vino</span>
+                        <span class="text-red-600">Rojo</span>
+                        <span class="text-gold-muted">Dorado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detalles y Regalo -->
+    <section id="detalles" class="py-24 bg-transparent text-center relative overflow-hidden">
+        <div class="flex justify-center mb-16 px-4">
+            <div class="elegant-floral-frame reveal-scale">
+                <div class="frame-lines"></div>
+                <!-- Foto vertical ajustada para que el rostro siempre sea visible -->
+                <img src="https://i.imgur.com/ambJt7D.jpg" class="framed-photo transition-all duration-1000" style="max-height: 600px; width: auto;" alt="Detalle Romina">
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+            <div class="reveal mb-24 w-full">
+                <h3 class="font-serif text-5xl mb-12 italic text-gold-muted">Detalles</h3>
+                <div class="p-12 md:p-16 bg-white/5 border border-white/10 rounded-3xl mx-auto max-w-2xl text-center shadow-2xl backdrop-blur-md">
+                    <p class="text-lg mb-8 italic text-white/60 font-serif">“Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo:”</p>
+                    <p class="text-[11px] font-bold uppercase text-gold-muted tracking-[0.5em]">Liverpool</p>
+                    <p class="text-6xl md:text-7xl font-serif text-white tracking-[0.1em] italic">51936318</p>
+                    <p class="text-[9px] text-white/30 uppercase font-bold tracking-[0.4em] mt-4">Contaremos con buzón de sobres</p>
+                </div>
+            </div>
+
+            <!-- Contador -->
+            <div class="reveal py-20 border-y border-white/5 mb-24 text-center w-full">
+                <h3 class="font-serif text-3xl uppercase tracking-[0.4em] mb-12 text-gold-muted italic">Faltan sólo...</h3>
+                <div id="timer" class="flex justify-center gap-4 flex-wrap"></div>
+            </div>
+
+            <!-- Mensaje Adultos -->
+            <div class="reveal py-16 bg-white/5 border-y border-white/10 rounded-[50px] text-center px-6 backdrop-blur-lg max-w-2xl">
+                <p class="font-serif text-4xl italic text-gold-muted mb-6">“Velada de Gala”</p>
+                <p class="text-[11px] text-white/50 uppercase tracking-[0.3em] leading-loose font-bold">
+                    Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para el disfrute de los adultos.
+                </p>
             </div>
         </div>
     </section>
@@ -342,54 +403,65 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script>
         const welcome = document.getElementById('welcome-overlay');
         const openBtn = document.getElementById('open-btn');
         const audio = document.getElementById('player');
         const musicBtn = document.getElementById('music-btn');
 
-        // ESTRATEGIA DE DESBLOQUEO DE AUDIO (Método Anel y Alfonso)
-        openBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // 1. Comando inmediato de reproducción para Safari/iOS
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#image-carousel', {
+                type   : 'loop',
+                perPage: 1,
+                autoplay: true,
+                interval: 3000,
+                pauseOnHover: false,
+                arrows: false,
+                pagination: true
+            }).mount();
+        });
+
+        function forcePlay() {
             audio.play().then(() => {
                 musicBtn.classList.remove('hidden');
-                console.log("Audio iniciado con éxito");
-            }).catch(error => {
-                console.warn("Reproducción bloqueada, intentando bypass silencioso...");
+            }).catch(e => {
                 audio.muted = true;
                 audio.play().then(() => {
-                    setTimeout(() => { audio.muted = false; }, 100);
-                    musicBtn.classList.remove('hidden');
+                    setTimeout(() => { audio.muted = false; musicBtn.classList.remove('hidden'); }, 200);
                 });
             });
+        }
 
-            // 2. Transición visual
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            forcePlay();
             welcome.classList.add('opened');
             document.body.style.overflow = 'auto';
             setTimeout(() => { welcome.style.display = 'none'; }, 1300);
         });
 
-        // Mariposas
-        const butterBox = document.getElementById('butterfly-box');
-        if (butterBox) {
-            for (let i = 0; i < 12; i++) {
-                const bfly = document.createElement('div');
-                bfly.className = 'butterfly';
-                bfly.innerHTML = '<div class="wing left"></div><div class="wing right"></div>';
-                bfly.style.left = Math.random() * 100 + '%';
-                bfly.style.top = Math.random() * 100 + '%';
-                bfly.style.setProperty('--speed', (Math.random() * 15 + 15) + 's');
-                bfly.style.animationDelay = Math.random() * 15 + 's';
-                butterBox.appendChild(bfly);
-            }
-        }
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .botanical-accent').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .reveal-scale').forEach(el => observer.observe(el));
+
+        const target = new Date("July 11, 2026 18:30:00").getTime();
+        function updateTimer() {
+            const diff = target - Date.now();
+            if (diff < 0) return;
+            const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
+            const timerEl = document.getElementById('timer');
+            if (timerEl) {
+                timerEl.innerHTML = `
+                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${d}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Días</span></div>
+                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${h}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Horas</span></div>
+                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${m}</span><span class='text-[8px] uppercase tracking-widest opacity-40'>Min</span></div>
+                    <div class='timer-box'><span class='text-3xl block text-gold-muted font-serif'>${s}</span><span class='text-[9px] uppercase tracking-widest opacity-40'>Seg</span></div>`;
+            }
+        }
+        setInterval(updateTimer, 1000); updateTimer();
 
         let playing = true;
         musicBtn.addEventListener('click', () => {
