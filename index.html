@@ -60,7 +60,7 @@
             background-image: url("https://i.imgur.com/viRuWGc.png");
             background-size: 600px;
             background-repeat: repeat;
-            opacity: 0.12; 
+            opacity: 0.15; 
             z-index: -1;
             pointer-events: none;
         }
@@ -154,9 +154,32 @@
         }
         .splide__pagination__page.is-active { background: var(--gold-muted); }
 
-        /* RESALTADO DE COLORES EXCLUSIVOS */
+        /* COLORES */
         .color-badge { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .color-circle { width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .color-circle { width: 45px; height: 45px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+
+        /* BOTÓN FLOTANTE */
+        #floating-wa {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            width: 60px;
+            height: 60px;
+            background: rgba(13, 26, 21, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gold-muted);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff; 
+            font-size: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        #floating-wa:hover { transform: scale(1.1); background: var(--gold-muted); color: #fff; }
 
         /* PASE PERSONAL ESTILO CARD */
         #personal-pass-display {
@@ -171,20 +194,11 @@
             margin: 20px auto;
         }
 
-        #personal-pass-display::before {
-            content: "";
-            position: absolute;
-            inset: 10px;
-            border: 1px solid rgba(197, 163, 104, 0.3);
-            border-radius: 18px;
-            pointer-events: none;
-        }
-
         /* BOTONES */
         .btn-confirm {
             background-color: var(--gold-muted);
-            color: #000;
-            padding: 20px 45px;
+            color: #fff; 
+            padding: 18px 40px;
             border-radius: 50px;
             font-weight: 800;
             text-transform: uppercase;
@@ -195,14 +209,11 @@
             gap: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            margin: 4rem auto 0;
+            margin: 2rem auto 0;
             width: fit-content;
             text-decoration: none;
             cursor: pointer;
         }
-
-        nav { background: rgba(13, 26, 21, 0.95); border-bottom: 1px solid rgba(197, 163, 104, 0.15); backdrop-filter: blur(10px); }
-        .nav-link { color: var(--text-light) !important; opacity: 0.7; }
 
         .timer-box {
             background: rgba(255, 255, 255, 0.05);
@@ -215,6 +226,11 @@
     </style>
 </head>
 <body>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/524433586727" id="floating-wa" target="_blank" title="Confirmar Asistencia">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <!-- BIENVENIDA -->
     <div id="welcome-overlay">
@@ -232,7 +248,7 @@
         <source src="https://dl.dropboxusercontent.com/scl/fi/1kf60fq07vw21qftukjtq/Twilight-Soundtrack-Bellas-Lullaby.mp3?rlkey=yiag51ierd8sodlkhkvl5gqyy" type="audio/mpeg">
     </audio>
     
-    <button id="music-btn" class="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border border-white/20 shadow-lg text-white hidden backdrop-blur-md">
+    <button id="music-btn" class="fixed bottom-24 right-8 z-[150] w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border border-white/20 shadow-lg text-white hidden backdrop-blur-md">
         <i id="music-icon" class="fa-solid fa-pause"></i>
     </button>
 
@@ -279,7 +295,7 @@
                     <div>
                         <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mis Padres</p>
                         <p class="text-3xl font-serif italic text-gold-muted">Alicia Ibeth Cornejo Medina</p>
-                        <p class="text-3xl font-serif italic text-gold-muted">Sergio Barajas Mondragón</p>
+                        <p class="text-3xl font-serif italic text-gold-muted">Sergio Omanra Barajas Mondragón</p>
                     </div>
                     <div>
                         <p class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Mi Madrina</p>
@@ -305,13 +321,14 @@
                         <li class="splide__slide"><img src="https://i.imgur.com/MYy4IH8.jpg" alt="Romina 3"></li>
                         <li class="splide__slide"><img src="https://i.imgur.com/8IQaYES.jpg" alt="Romina 4"></li>
                         <li class="splide__slide"><img src="https://i.imgur.com/3RGFPbF.jpg" alt="Romina 5"></li>
+                        <li class="splide__slide"><img src="https://i.imgur.com/te1mTmp.jpg" alt="Romina 6"></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Itinerario Actualizado -->
+    <!-- Itinerario -->
     <section id="itinerario" class="py-24 relative overflow-hidden bg-black/10">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-serif text-6xl text-center mb-20 italic text-gold-muted reveal">Itinerario</h2>
@@ -343,68 +360,84 @@
         </div>
     </section>
 
-    <!-- Etiqueta con Colores Resaltados -->
+    <!-- Etiqueta -->
     <section id="vestimenta" class="py-24 bg-black/30 text-white text-center relative overflow-hidden">
         <div class="max-w-2xl mx-auto px-6 reveal">
             <h3 class="font-serif text-4xl uppercase tracking-[0.4em] mb-12 italic text-gold-muted">Etiqueta</h3>
-            <div class="p-10 border border-white/5 bg-white/[0.02] rounded-3xl backdrop-blur-md">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-white/60">Formal / Gala</p>
-                <div class="pt-6 border-t border-white/10">
-                    <p class="font-serif text-xl italic text-gold-muted mb-8">Colores exclusivos de la Quinceañera:</p>
+            <div class="p-8 border border-white/5 bg-black/40 rounded-3xl backdrop-blur-md">
+                <!-- Código de Vestimenta Agregado -->
+                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-white/60">CÓDIGO DE VESTIMENTA: FORMAL / GALA</p>
+                
+                <!-- Colores Exclusivos -->
+                <div class="mb-12">
+                    <p class="font-serif text-lg italic text-gold-muted mb-6">Colores exclusivos de la Quinceañera:</p>
                     <div class="flex justify-center gap-10 flex-wrap">
                         <div class="color-badge">
                             <div class="color-circle" style="background: #641e16;"></div>
-                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Vino</span>
+                            <span class="text-[9px] font-bold tracking-widest uppercase text-white">Vino</span>
                         </div>
                         <div class="color-badge">
                             <div class="color-circle" style="background: #922b21;"></div>
-                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Rojo</span>
+                            <span class="text-[9px] font-bold tracking-widest uppercase text-white">Rojo</span>
                         </div>
                         <div class="color-badge">
                             <div class="color-circle" style="background: linear-gradient(135deg, #d4af37, #f1c40f);"></div>
-                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">Dorado</span>
+                            <span class="text-[9px] font-bold tracking-widest uppercase text-white">Dorado</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="h-px w-24 bg-white/10 mx-auto mb-10"></div>
+
+                <!-- Colores Sugeridos -->
+                <div>
+                    <p class="font-serif text-lg italic text-white/70 mb-6">Colores sugeridos para invitados:</p>
+                    <div class="flex justify-center gap-6 flex-wrap">
+                        <div class="color-badge"><div class="color-circle" style="background: #1b4332;"></div><span class="text-[8px] uppercase opacity-40">Verde</span></div>
+                        <div class="color-badge"><div class="color-circle" style="background: #212f3d;"></div><span class="text-[8px] uppercase opacity-40">Azul</span></div>
+                        <div class="color-badge"><div class="color-circle" style="background: #e5e7e9;"></div><span class="text-[8px] uppercase opacity-40">Beige</span></div>
+                        <div class="color-badge"><div class="color-circle" style="background: #7f8c8d;"></div><span class="text-[8px] uppercase opacity-40">Gris</span></div>
+                        <div class="color-badge"><div class="color-circle" style="background: #5d4037;"></div><span class="text-[8px] uppercase opacity-40">Café</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ASISTENCIA Y GENERADOR DE PASES INTELIGENTE -->
+    <!-- ASISTENCIA Y GENERADOR DE PASES MEJORADO -->
     <section id="confirmar" class="py-24 relative overflow-hidden bg-white/[0.02]">
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h3 class="font-serif text-7xl italic mb-10 text-gold-muted">Asistencia</h3>
-            <p class="text-xl mb-12 italic font-light text-white/60">
-                “Me encantaría compartir este sueño contigo.”
-            </p>
-
-            <div class="reveal mb-12 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md max-w-md mx-auto">
+            
+            <div class="reveal mb-12 p-8 bg-black/60 border border-white/10 rounded-3xl backdrop-blur-md max-w-md mx-auto shadow-2xl">
                 <div class="text-gold-muted mb-4 text-3xl"><i class="fa-solid fa-champagne-glasses"></i></div>
                 <p class="font-serif text-2xl italic text-gold-muted mb-4">“Velada de Gala”</p>
-                <p class="text-[11px] text-white/50 uppercase tracking-[0.2em] leading-relaxed font-bold">
+                <p class="text-[11px] text-white/80 uppercase tracking-[0.2em] leading-relaxed font-bold">
                     Agradecemos su comprensión: hemos diseñado una noche pensada especialmente para el disfrute de los adultos.
                 </p>
             </div>
 
-            <!-- FORMULARIO DE PASES -->
-            <div id="pass-form" class="max-w-md mx-auto space-y-6 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md">
+            <!-- FORMULARIO -->
+            <div id="pass-form" class="max-w-md mx-auto space-y-6 bg-black/60 p-10 rounded-3xl border border-gold-muted/20 shadow-2xl backdrop-blur-xl">
                 <div class="text-left">
-                    <label class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Nombre del Invitado</label>
-                    <input type="text" id="guest-name" placeholder="Escribe tu nombre completo" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none transition-all">
+                    <label class="text-[11px] uppercase tracking-widest text-gold-muted font-bold ml-1">Nombre del Invitado</label>
+                    <input type="text" id="guest-name" placeholder="Escribe tu nombre completo" class="w-full bg-black/80 border border-white/20 rounded-xl p-4 mt-2 text-white focus:border-gold-muted outline-none transition-all placeholder:text-white/20">
                 </div>
                 <div class="text-left">
-                    <label id="label-count" class="text-[10px] uppercase tracking-widest text-gold-muted ml-2">Número de Personas</label>
-                    <select id="guest-count" class="w-full bg-black/40 border border-white/10 rounded-xl p-4 mt-2 focus:border-gold-muted outline-none appearance-none transition-all">
-                        <!-- Las opciones se generarán dinámicamente -->
-                        <option value="1">1 Persona</option>
-                        <option value="2">2 Personas</option>
-                        <option value="3">3 Personas</option>
-                        <option value="4">4 Personas</option>
-                        <option value="5">5 Personas</option>
-                    </select>
+                    <label id="label-count" class="text-[11px] uppercase tracking-widest text-gold-muted font-bold ml-1">Número de Personas</label>
+                    <div class="relative mt-2">
+                        <select id="guest-count" class="w-full bg-black/80 border border-white/20 rounded-xl p-4 text-white focus:border-gold-muted outline-none appearance-none cursor-pointer">
+                            <option value="1">1 Persona</option>
+                            <option value="2">2 Personas</option>
+                            <option value="3">3 Personas</option>
+                            <option value="4">4 Personas</option>
+                            <option value="5">5 Personas</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gold-muted pointer-events-none"></i>
+                    </div>
                 </div>
-                <button onclick="generatePass()" class="w-full bg-gold-muted text-black font-bold p-4 rounded-xl hover:scale-[1.02] transition-transform uppercase tracking-widest text-xs">
-                    Generar Pase Personal
+                <button onclick="generatePass()" class="w-full bg-gold-muted text-white font-black p-5 rounded-xl hover:scale-[1.03] active:scale-95 transition-all uppercase tracking-[0.2em] text-sm shadow-xl mt-4">
+                    Generar Mi Pase Personal
                 </button>
             </div>
 
@@ -422,11 +455,11 @@
                 </div>
             </div>
 
-            <p id="pass-instruction" class="hidden text-[10px] text-white/40 mt-6 uppercase tracking-widest italic animate-pulse">
+            <p id="pass-instruction" class="hidden text-[10px] text-white/60 mt-8 uppercase tracking-widest italic animate-pulse">
                 Toma captura de pantalla a tu pase y presiona confirmar:
             </p>
 
-            <a id="wa-btn" href="#" target="_blank" class="btn-confirm hidden">
+            <a id="wa-btn" href="#" target="_blank" class="btn-confirm hidden mt-6">
                 <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
             </a>
         </div>
@@ -444,14 +477,14 @@
         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
             <h3 class="font-serif text-5xl mb-12 italic text-gold-muted reveal">Detalles</h3>
 
-            <div class="reveal mb-16 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
+            <div class="reveal mb-16 w-full max-w-2xl p-10 bg-black/40 border border-white/10 rounded-3xl backdrop-blur-md">
                 <div class="text-gold-muted mb-6 text-5xl"><i class="fa-solid fa-envelope-open-text"></i></div>
                 <p class="text-lg italic text-white/80 font-serif leading-relaxed">
                     “Tu compañía es mi mejor regalo, pero si deseas tener un detalle conmigo, contaremos con buzón de sobres en la recepción.”
                 </p>
             </div>
 
-            <div class="reveal mb-24 w-full max-w-2xl p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
+            <div class="reveal mb-24 w-full max-w-2xl p-10 bg-black/40 border border-white/10 rounded-3xl backdrop-blur-md">
                 <p class="text-[11px] font-bold uppercase text-gold-muted tracking-[0.5em] mb-4">Mesa de Regalos Liverpool</p>
                 <div class="text-pink-400 mb-4 text-3xl"><i class="fa-solid fa-gift"></i></div>
                 <p class="text-6xl md:text-7xl font-serif text-white tracking-[0.1em] italic">51936318</p>
@@ -481,25 +514,17 @@
         const audio = document.getElementById('player');
         const musicBtn = document.getElementById('music-btn');
 
-        // --- SISTEMA DE CONTROL DE PASES VÍA URL ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const invitado = urlParams.get('invitado'); // Parámetro 'invitado'
-            const pasesMax = urlParams.get('pases');    // Parámetro 'pases'
+            const invitado = urlParams.get('invitado');
+            const pasesMax = urlParams.get('pases');
 
-            const nameInput = document.getElementById('guest-name');
-            const selectCount = document.getElementById('guest-count');
-            const labelCount = document.getElementById('label-count');
-
-            if (invitado) {
-                nameInput.value = invitado.replace(/\+/g, ' ');
-            }
+            if (invitado) document.getElementById('guest-name').value = invitado.replace(/\+/g, ' ');
 
             if (pasesMax) {
                 const limit = parseInt(pasesMax);
-                labelCount.innerText = `Número de Personas (Máximo ${limit})`;
-                
-                // Limpiar opciones y regenerar según el límite del link
+                document.getElementById('label-count').innerText = `Número de Personas (Máximo ${limit})`;
+                const selectCount = document.getElementById('guest-count');
                 selectCount.innerHTML = "";
                 for(let i = 1; i <= limit; i++) {
                     const opt = document.createElement('option');
@@ -508,8 +533,6 @@
                     selectCount.appendChild(opt);
                 }
             }
-            
-            // Inicializar Carrusel
             new Splide('#image-carousel', { type: 'loop', perPage: 1, autoplay: true, interval: 3000, arrows: false, pagination: true }).mount();
         };
 
@@ -533,7 +556,8 @@
             const count = document.getElementById('guest-count').value;
             
             if(name.trim() === "") {
-                alert("Por favor escribe tu nombre");
+                document.getElementById('guest-name').classList.add('border-red-500');
+                setTimeout(() => document.getElementById('guest-name').classList.remove('border-red-500'), 2000);
                 return;
             }
 
