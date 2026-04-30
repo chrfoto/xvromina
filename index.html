@@ -209,7 +209,7 @@
             gap: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            margin: 2rem auto 0;
+            margin: 4rem auto 0;
             width: fit-content;
             text-decoration: none;
             cursor: pointer;
@@ -403,7 +403,7 @@
         </div>
     </section>
 
-    <!-- ASISTENCIA Y GENERADOR DE PASES MEJORADO -->
+    <!-- ASISTENCIA Y GENERADOR DE PASES -->
     <section id="confirmar" class="py-24 relative overflow-hidden bg-white/[0.02]">
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h3 class="font-serif text-7xl italic mb-10 text-gold-muted">Asistencia</h3>
@@ -420,7 +420,7 @@
                 </p>
             </div>
 
-            <!-- MENSAJE DE FECHA LÍMITE -->
+            <!-- FECHA LÍMITE -->
             <p class="text-lg mb-10 italic text-white/70">
                 Por favor confirma tu asistencia antes del <strong>6 de junio</strong>
             </p>
@@ -459,15 +459,19 @@
                     <p id="display-name" class="font-serif text-2xl text-white italic mb-8"></p>
                     <p class="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-2">Válido para:</p>
                     <p id="display-count" class="font-serif text-5xl text-gold-muted italic"></p>
-                    <p class="text-[9px] uppercase tracking-widest text-white/30 mt-12">11 de Julio, 2026 | Morelia, Mich.</p>
+                    <!-- Fecha y lugar más grandes y claros -->
+                    <p class="text-sm sm:text-base font-bold uppercase tracking-widest text-white mt-12 bg-white/10 py-3 rounded-lg inline-block px-6">
+                        11 de Julio, 2026 | Morelia, Mich.
+                    </p>
                 </div>
             </div>
 
-            <p id="pass-instruction" class="hidden text-[10px] text-white/60 mt-8 uppercase tracking-widest italic animate-pulse">
-                Toma captura de pantalla a tu pase y presiona confirmar:
+            <!-- Instrucción resaltada con TIPOGRAFÍA EN BLANCO -->
+            <p id="pass-instruction" class="hidden text-sm sm:text-base font-bold text-white bg-gold-muted py-4 px-8 mt-10 rounded-full inline-block uppercase tracking-wider shadow-2xl animate-pulse">
+                <i class="fa-solid fa-camera mr-2"></i> Toma captura de pantalla a tu pase y presiona confirmar:
             </p>
 
-            <a id="wa-btn" href="#" target="_blank" class="btn-confirm hidden mt-6">
+            <a id="wa-btn" href="#" target="_blank" class="btn-confirm hidden mt-8">
                 <i class="fa-brands fa-whatsapp text-xl"></i> CONFIRMAR ASISTENCIA
             </a>
         </div>
@@ -514,7 +518,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script>
         const welcome = document.getElementById('welcome-overlay');
